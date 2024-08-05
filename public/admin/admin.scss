@@ -55,9 +55,10 @@
         display: flex;
         justify-content: space-between;
         flex-wrap: wrap;
+        margin-top: 25px;
         .day{
             width: 340px;
-            height: 311px;
+            height: 300px;
             background-color: #00796B;
             border-radius: 16px;
             padding: 15px;
@@ -67,6 +68,7 @@
                 justify-content: space-between;
                 color: #fff;
                 align-items: flex-end;
+                margin-bottom: 10px;
                 h2{
                     font-size: 24px;
                     font-weight: 700;
@@ -74,6 +76,28 @@
                 .date{
                     font-size: 16px;
                     font-weight: 300;
+                }
+            }
+            .string{
+                width: 100%;
+                display: flex;
+                margin-bottom: 10px;
+                .subject{
+                    width: 30%;
+                    color: #fff;
+                    font-size: 16px;
+                    font-weight: 200;
+                }
+                .homework{
+                    width: 70%;
+                    background-color: #00796B;
+                    border: none;
+                    outline: none;
+                    color: #fff;
+                    font-weight: 500;
+                    &::placeholder{
+                        color: #B2DFDB;
+                    }
                 }
             }
 
