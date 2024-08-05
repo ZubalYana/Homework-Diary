@@ -32,7 +32,6 @@
     padding: 40px;
     color: #212121;
     padding-top: 30px;
-  
     .header {
       width: 100%;
       display: flex;
@@ -75,7 +74,6 @@
         color: #00796b;
       }
     }
-  
     .daysContainer {
       display: flex;
       justify-content: flex-start;
@@ -140,6 +138,30 @@
           }
         }
       }
+    }
+    .setChanges_btn{
+        width: 280px;
+        height: 70px;
+        background-color: #009688;
+        color: #fff;
+        font-size: 36px;
+        font-weight: 600;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 16px;
+        transition: 0.4s ease-in-out;
+        cursor: pointer;
+        margin-top: 40px;
+        user-select: none;
+    }
+    .setChanges_btn:hover{
+        background-color: #B2DFDB;
+        color: #212121;
+    }
+    .setChanges_btn:active{
+        background-color: #212121;
+        color: #fff;
     }
   }
   

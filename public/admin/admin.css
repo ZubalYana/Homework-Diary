@@ -134,4 +134,30 @@
 }
 .wrap .daysContainer .day .string .homework::placeholder {
   color: #b2dfdb;
+}
+.wrap .setChanges_btn {
+  width: 280px;
+  height: 70px;
+  background-color: #009688;
+  color: #fff;
+  font-size: 36px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  transition: 0.4s ease-in-out;
+  cursor: pointer;
+  margin-top: 40px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.wrap .setChanges_btn:hover {
+  background-color: #B2DFDB;
+  color: #212121;
+}
+.wrap .setChanges_btn:active {
+  background-color: #212121;
+  color: #fff;
 }/*# sourceMappingURL=admin.css.map */
