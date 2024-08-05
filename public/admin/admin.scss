@@ -50,4 +50,33 @@
             color: #00796B;
         }
     }
+    .daysContainer{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        .day{
+            width: 340px;
+            height: 311px;
+            background-color: #00796B;
+            border-radius: 16px;
+            padding: 15px;
+            .dayTopInfo{
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                color: #fff;
+                align-items: flex-end;
+                h2{
+                    font-size: 24px;
+                    font-weight: 700;
+                }
+                .date{
+                    font-size: 16px;
+                    font-weight: 300;
+                }
+            }
+
+        }
+    }
 }
