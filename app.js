@@ -11,11 +11,9 @@ const TOKEN = '7434998252:AAGvjoW9XAUQUbgNwN0YQs7cbsSMrooX8BA';
 const bot = new TelegramBot(TOKEN, { polling: true });
 const usersFilePath = path.join(__dirname, 'users.json');
 let users = [];
-// mongodb+srv://zubalana0:uCwCHLBRS6IBvGAl@cluster0.nkm20.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-// PK0sF9xAzxjUWrH9
-// mongodb+srv://zubalana0:PK0sF9xAzxjUWrH9@cluster0.niyre.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 const mongoose = require('mongoose')
-mongoose.connect(`mongodb+srv://zubalana0:PK0sF9xAzxjUWrH9@cluster0.niyre.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`)
+const env = require('dotenv').config()
+mongoose.connect(`mongodb+srv://zubalana0:${process.env.PASSWORD}@cluster0.niyre.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`)
     .then(() => {
         console.log('Connected to MongoDB');
     })
