@@ -6,14 +6,20 @@ const fs = require('fs');
 const TelegramBot = require('node-telegram-bot-api');
 const dotenv = require('dotenv');
 dotenv.config();
-
 const PORT = 3000;
 const TOKEN = '7434998252:AAGvjoW9XAUQUbgNwN0YQs7cbsSMrooX8BA';
 const bot = new TelegramBot(TOKEN, { polling: true });
-
 const usersFilePath = path.join(__dirname, 'users.json');
 let users = [];
-
+// mongodb+srv://zubalana0:uCwCHLBRS6IBvGAl@cluster0.nkm20.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+const mongoose = require('mongoose')
+mongoose.connect(`mongodb+srv://zubalana0:uCwCHLBRS6IBvGAl@cluster0.nkm20.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`)
+    .then(() => {
+        console.log('Connected to MongoDB');
+    })
+    .catch((error) => {
+        console.error('Error connecting to MongoDB:', error);
+    });
 if (fs.existsSync(usersFilePath)) {
     users = JSON.parse(fs.readFileSync(usersFilePath, 'utf8'));
 }
