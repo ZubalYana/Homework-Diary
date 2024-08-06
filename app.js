@@ -14,7 +14,6 @@ const mongoose = require('mongoose')
 const env = require('dotenv').config()
 const PORT = process.env.PORT || 3000;
 const Homework = require('./models/Homework')
-const router = express.Router();
 mongoose.connect(`mongodb+srv://zubalana0:${process.env.PASSWORD}@cluster0.niyre.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`)
     .then(() => {
         console.log('Connected to MongoDB');
@@ -50,31 +49,21 @@ app.post('/send', (req, res) => {
     res.sendStatus(200);
 });
 
-// app.post('/homework', (req, res) => {
-//     const { homework, day } = req.body;
-//     if (!homework || !day) {
-//         return res.status(400).send('Homework and day are required.');
-//     }
-//     const newHomework = new Homework({
-//         homework,
-//         day
-//     });
-//     newHomework.save()
-//         .then(() => res.status(201).send('Homework saved successfully!'))
-//         .catch((error) => res.status(500).send('Error saving homework: ' + error));
-// });
-
-router.post('/addHomework', async (req, res) => {
+app.post('/homework', (req, res) => {
     const { homework, day, subject } = req.body;
-
-    try {
-        const newHomework = new Homework({ homework, day, subject });
-        await newHomework.save();
-        res.status(201).send('Homework added successfully');
-    } catch (error) {
-        res.status(400).send('Error adding homework');
+    if (!homework || !day || !subject) {
+        return res.status(400).send('Homework and day are required.');
     }
+    const newHomework = new Homework({
+        homework,
+        day,
+        subject
+    });
+    newHomework.save()
+        .then(() => res.status(201).send('Homework saved successfully!'))
+        .catch((error) => res.status(500).send('Error saving homework: ' + error));
 });
+
 
 bot.on('message', (msg) => {
     const userId = 1132590035;
