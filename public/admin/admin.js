@@ -4,12 +4,21 @@ $(document).ready(function() {
         
         for (const day of days) {
             for (let i = 1; i <= 8; i++) {
-                const subject = $(`#${day.toLowerCase()}_subject${i}`).text().replace(':', '').trim();
-                const homework = $(`#${day.toLowerCase()}_homework${i}`).val().trim();
+                const subjectElement = $(`#${day.toLowerCase()}_subject${i}`);
+                const homeworkElement = $(`#${day.toLowerCase()}_homework${i}`);
+
+                console.log(`Subject Element: ${subjectElement.length}`);
+                console.log(`Homework Element: ${homeworkElement.length}`);
+
+                const subject = subjectElement.text().replace(':', '');
+                const homework = homeworkElement.val();
+
+                console.log(`Subject: ${subject}`);
+                console.log(`Homework: ${homework}`);
 
                 if (homework) {
                     try {
-                        await axios.post('/addHomework', {
+                        await axios.post('/homework', {
                             homework,
                             day,
                             subject

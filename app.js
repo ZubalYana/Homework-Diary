@@ -50,6 +50,7 @@ app.post('/send', (req, res) => {
 });
 
 app.post('/homework', (req, res) => {
+    console.log('Received data:', req.body);
     const { homework, day, subject } = req.body;
     if (!homework || !day || !subject) {
         return res.status(400).send('Homework and day are required.');
@@ -63,6 +64,7 @@ app.post('/homework', (req, res) => {
         .then(() => res.status(201).send('Homework saved successfully!'))
         .catch((error) => res.status(500).send('Error saving homework: ' + error));
 });
+
 
 
 bot.on('message', (msg) => {
