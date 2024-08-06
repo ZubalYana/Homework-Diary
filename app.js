@@ -6,13 +6,14 @@ const fs = require('fs');
 const TelegramBot = require('node-telegram-bot-api');
 const dotenv = require('dotenv');
 dotenv.config();
-const PORT = 3000;
 const TOKEN = '7434998252:AAGvjoW9XAUQUbgNwN0YQs7cbsSMrooX8BA';
 const bot = new TelegramBot(TOKEN, { polling: true });
 const usersFilePath = path.join(__dirname, 'users.json');
 let users = [];
 const mongoose = require('mongoose')
 const env = require('dotenv').config()
+const PORT = process.env.PORT || 3000;
+
 mongoose.connect(`mongodb+srv://zubalana0:${process.env.PASSWORD}@cluster0.niyre.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`)
     .then(() => {
         console.log('Connected to MongoDB');
