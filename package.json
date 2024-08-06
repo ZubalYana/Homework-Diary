@@ -5,6 +5,7 @@
     "express": "^4.19.2",
     "fs": "^0.0.1-security",
     "i": "^0.3.7",
+    "mongodb": "^6.8.0",
     "mongoose": "^8.5.2",
     "node-telegram-bot-api": "^0.66.0"
   }
