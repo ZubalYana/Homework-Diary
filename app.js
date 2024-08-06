@@ -50,6 +50,20 @@ app.post('/send', (req, res) => {
     res.sendStatus(200);
 });
 
+app.post('/homework', (req, res) => {
+    const { homework, day } = req.body;
+    if (!homework || !day) {
+        return res.status(400).send('Homework and day are required.');
+    }
+    const newHomework = new Homework({
+        homework,
+        day
+    });
+    newHomework.save()
+        .then(() => res.status(201).send('Homework saved successfully!'))
+        .catch((error) => res.status(500).send('Error saving homework: ' + error));
+});
+
 bot.on('message', (msg) => {
     const userId = 1132590035;
     const chatId = msg.chat.id;
