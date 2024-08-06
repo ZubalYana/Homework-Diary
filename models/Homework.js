@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const homeworkScheme = new mongoose.Schema({
+const homeworkSchema = new mongoose.Schema({
     homework: {
         type: String,
         required: true
@@ -8,8 +8,12 @@ const homeworkScheme = new mongoose.Schema({
     day: {
         type: String,
         required: true
+    },
+    subject: {
+        type: String,
+        required: true
     }
 });
 
-const homework = mongoose.model('homework', homeworkScheme);
-module.exports = homework;
+const Homework = mongoose.model('Homework', homeworkSchema);
+module.exports = Homework;
