@@ -13,6 +13,7 @@ let users = [];
 const mongoose = require('mongoose')
 const env = require('dotenv').config()
 const PORT = process.env.PORT || 3000;
+const Homework = require('./models/Homework')
 
 mongoose.connect(`mongodb+srv://zubalana0:${process.env.PASSWORD}@cluster0.niyre.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`)
     .then(() => {
