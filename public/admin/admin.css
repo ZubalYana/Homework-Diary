@@ -62,7 +62,6 @@
 }
 .wrap .header .nav .nav_link {
   cursor: pointer;
-  transition: 0.4s ease-in-out;
 }
 .wrap .header .nav .nav_link:hover {
   color: #00796b;
@@ -75,7 +74,10 @@
 .wrap .header #adminsettings:hover {
   color: #00796b;
 }
-.wrap .daysContainer {
+.wrap .homework {
+  flex-direction: column;
+}
+.wrap .homework .daysContainer {
   display: flex;
   justify-content: flex-start;
   margin-top: 25px;
@@ -84,7 +86,7 @@
   overflow-y: hidden;
   height: 330px;
 }
-.wrap .daysContainer .day {
+.wrap .homework .daysContainer .day {
   width: 340px;
   height: 300px;
   background-color: #00796b;
@@ -94,7 +96,7 @@
   flex-shrink: 0;
   margin-bottom: 30px;
 }
-.wrap .daysContainer .day .dayTopInfo {
+.wrap .homework .daysContainer .day .dayTopInfo {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -102,26 +104,26 @@
   align-items: flex-end;
   margin-bottom: 10px;
 }
-.wrap .daysContainer .day .dayTopInfo h2 {
+.wrap .homework .daysContainer .day .dayTopInfo h2 {
   font-size: 24px;
   font-weight: 700;
 }
-.wrap .daysContainer .day .dayTopInfo .date {
+.wrap .homework .daysContainer .day .dayTopInfo .date {
   font-size: 16px;
   font-weight: 300;
 }
-.wrap .daysContainer .day .string {
+.wrap .homework .daysContainer .day .string {
   width: 100%;
   display: flex;
   margin-bottom: 10px;
 }
-.wrap .daysContainer .day .string .subject {
+.wrap .homework .daysContainer .day .string .subject {
   width: 30%;
   color: #fff;
   font-size: 16px;
   font-weight: 200;
 }
-.wrap .daysContainer .day .string .homework {
+.wrap .homework .daysContainer .day .string .homework {
   width: 70%;
   background-color: #00796b;
   border: none;
@@ -129,13 +131,13 @@
   color: #fff;
   font-weight: 500;
 }
-.wrap .daysContainer .day .string .homework::-moz-placeholder {
+.wrap .homework .daysContainer .day .string .homework::-moz-placeholder {
   color: #b2dfdb;
 }
-.wrap .daysContainer .day .string .homework::placeholder {
+.wrap .homework .daysContainer .day .string .homework::placeholder {
   color: #b2dfdb;
 }
-.wrap .setChanges_btn {
+.wrap .homework .setChanges_btn {
   width: 280px;
   height: 70px;
   background-color: #009688;
@@ -153,11 +155,11 @@
      -moz-user-select: none;
           user-select: none;
 }
-.wrap .setChanges_btn:hover {
+.wrap .homework .setChanges_btn:hover {
   background-color: #B2DFDB;
   color: #212121;
 }
-.wrap .setChanges_btn:active {
+.wrap .homework .setChanges_btn:active {
   background-color: #212121;
   color: #fff;
 }/*# sourceMappingURL=admin.css.map */
