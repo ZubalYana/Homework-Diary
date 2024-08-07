@@ -1,4 +1,4 @@
-//pages navigation
+// Pages navigation
 $('#nav_homework').click(() => {
     $('#events').css('display', 'none');
     $('#distribution').css('display', 'none');
@@ -23,3 +23,51 @@ $('#nav_distribution').click(() => {
     $('#nav_events').removeClass('active_nav');
     $('#nav_distribution').addClass('active_nav');
 });
+document.querySelector('.setChanges_btn').addEventListener('click', function() {
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+    const homeworkData = {};
+
+    function parseDate(dateStr) {
+        const [day, month] = dateStr.split('.');
+        const year = new Date().getFullYear(); 
+        return new Date(`${year}-${month}-${day}`);
+    }
+
+    days.forEach(day => {
+        const dayElement = document.getElementById(day);
+        const lessons = [];
+        for (let i = 1; i <= 8; i++) {
+            const subjectElement = dayElement.querySelector(`#${day.toLowerCase().slice(0, 3)}_subject${i}`);
+            const homeworkElement = dayElement.querySelector(`#${day.toLowerCase().slice(0, 3)}_homework${i}`);
+
+            if (subjectElement && homeworkElement) {
+                const subject = subjectElement.innerText.replace(':', '');
+                const homework = homeworkElement.value;
+                lessons.push({ subject, homework });
+            }
+        }
+        homeworkData[day.toLowerCase()] = {
+            date: parseDate(dayElement.querySelector('.date').innerText),
+            lessons: lessons
+        };
+    });
+
+    console.log(homeworkData); 
+    saveHomework(homeworkData);
+});
+function saveHomework(homeworkData) {
+    fetch('/api/saveHomework', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(homeworkData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}

@@ -45,6 +45,23 @@ app.post('/send', (req, res) => {
 
     res.sendStatus(200);
 });
+app.post('/api/saveHomework', async (req, res) => {
+    try {
+        const { monday, tuesday, wednesday, thursday, friday } = req.body;
+        const newHomework = new Homework({
+            monday,
+            tuesday,
+            wednesday,
+            thursday,
+            friday
+        });
+        await newHomework.save();
+        res.status(201).json({ message: 'Homework saved successfully!' });
+    } catch (error) {
+        console.error('Error saving homework:', error);
+        res.status(500).json({ error: 'Failed to save homework', details: error.message });
+    }
+});
 bot.on('message', (msg) => {
     const userId = 1132590035;
     const chatId = msg.chat.id;
