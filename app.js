@@ -14,8 +14,6 @@ const mongoose = require('mongoose')
 const env = require('dotenv').config()
 const PORT = process.env.PORT || 3000;
 const Homework = require('./models/Homework')
-const Homework = require('./models/Monday')
-
 mongoose.connect(`mongodb+srv://zubalana0:${process.env.PASSWORD}@cluster0.niyre.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`)
     .then(() => {
         console.log('Connected to MongoDB');
@@ -26,10 +24,8 @@ mongoose.connect(`mongodb+srv://zubalana0:${process.env.PASSWORD}@cluster0.niyre
 if (fs.existsSync(usersFilePath)) {
     users = JSON.parse(fs.readFileSync(usersFilePath, 'utf8'));
 }
-
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
-
 bot.onText(/\/start/, (msg) => {
     const chatId = msg.chat.id;
     if (!users.includes(chatId)) {
@@ -39,7 +35,6 @@ bot.onText(/\/start/, (msg) => {
 
     bot.sendMessage(chatId, "\n Привіт! Бот активовано. \nОтримуйте всю інформацію про домашнє завдання, дедлайни та події! \nВажливо: при перенавантаженні серверу, можлива затримка повідомлення до кількох хвилин. \nУ разі виникнення будь-яких проблем у використанні чи недостачі інформаціЇ, повідомляйте: @yanavesq.");
 });
-
 app.post('/send', (req, res) => {
     console.log(req.body.message);
     const message = req.body.message;
@@ -50,25 +45,6 @@ app.post('/send', (req, res) => {
 
     res.sendStatus(200);
 });
-
-// app.post('/homework', (req, res) => {
-//     console.log('Received data:', req.body);
-//     const { homework, day, subject } = req.body;
-//     if (!homework || !day || !subject) {
-//         return res.status(400).send('Homework and day are required.');
-//     }
-//     const newHomework = new Homework({
-//         homework,
-//         day,
-//         subject
-//     });
-//     newHomework.save()
-//         .then(() => res.status(201).send('Homework saved successfully!'))
-//         .catch((error) => res.status(500).send('Error saving homework: ' + error));
-// });
-
-
-
 bot.on('message', (msg) => {
     const userId = 1132590035;
     const chatId = msg.chat.id;
@@ -78,15 +54,12 @@ bot.on('message', (msg) => {
         bot.sendMessage(userId, `New message from ${chatId}: ${message}`);
     }
 });
-
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
-
 app.get('/admin', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'admin', 'admin.html'));
 });
-
 app.listen(PORT, () => {
     console.log(`Server running on PORT: ${PORT}`);
 });
