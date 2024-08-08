@@ -75,4 +75,7 @@ function saveHomework(homeworkData) {
 }
 
 //homework appending
-axios.get()
+axios.get('/api/getHomework')
+.then((res)=>{
+    console.log(res.data)
+})
