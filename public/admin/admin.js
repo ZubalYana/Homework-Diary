@@ -31,7 +31,7 @@ document.querySelector('.setChanges_btn').addEventListener('click', function() {
 
     function parseDate(dateStr) {
         const [day, month] = dateStr.split('.');
-        const year = new Date().getFullYear(); 
+        const year = new Date().getFullYear();
         return new Date(`${year}-${month}-${day}`);
     }
 
@@ -54,9 +54,10 @@ document.querySelector('.setChanges_btn').addEventListener('click', function() {
         };
     });
 
-    console.log(homeworkData); 
+    console.log(homeworkData);
     saveHomework(homeworkData);
 });
+
 function saveHomework(homeworkData) {
     fetch('/api/saveHomework', {
         method: 'POST',
@@ -78,7 +79,7 @@ function saveHomework(homeworkData) {
 document.addEventListener('DOMContentLoaded', (event) => {
     axios.get('/api/getHomework')
     .then((res) => {
-        const homework = res.data[0]; 
+        const homework = res.data[0];
         ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'].forEach((day, index) => {
             for (let i = 0; i < 8; i++) {
                 document.querySelector(`#${day.substring(0, 3)}_homework${i + 1}`).value = homework[day].lessons[i].homework;
@@ -112,6 +113,7 @@ document.querySelector('.setChanges_btn').addEventListener('click', function() {
 
     saveHomework(homeworkData);
 });
+
 function saveHomework(homeworkData) {
     fetch('/api/updateHomework', {
         method: 'POST',
