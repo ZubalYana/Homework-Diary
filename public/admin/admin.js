@@ -78,4 +78,5 @@ function saveHomework(homeworkData) {
 axios.get('/api/getHomework')
 .then((res)=>{
     console.log(res.data)
+    $('#mon_homework1').val(`${res.data[0].monday.lessons[0].homework}`)
 })
