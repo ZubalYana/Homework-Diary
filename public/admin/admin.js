@@ -74,58 +74,20 @@ function saveHomework(homeworkData) {
     });
 }
 
-//homework appending
-axios.get('/api/getHomework')
-.then((res)=>{
-    console.log(res.data)
+//homework displaying
+document.addEventListener('DOMContentLoaded', (event) => {
+    axios.get('/api/getHomework')
+    .then((res) => {
+        const homework = res.data[0]; // assuming you have only one homework document
 
-    //Monday
-    $('#mon_homework1').val(`${res.data[0].monday.lessons[0].homework}`)
-    $('#mon_homework2').val(`${res.data[0].monday.lessons[1].homework}`)
-    $('#mon_homework3').val(`${res.data[0].monday.lessons[2].homework}`)
-    $('#mon_homework4').val(`${res.data[0].monday.lessons[3].homework}`)
-    $('#mon_homework5').val(`${res.data[0].monday.lessons[4].homework}`)
-    $('#mon_homework6').val(`${res.data[0].monday.lessons[5].homework}`)
-    $('#mon_homework7').val(`${res.data[0].monday.lessons[6].homework}`)
-    $('#mon_homework8').val(`${res.data[0].monday.lessons[7].homework}`)
-
-    //Tuesday
-    $('#tue_homework1').val(`${res.data[0].tuesday.lessons[0].homework}`)
-    $('#tue_homework2').val(`${res.data[0].tuesday.lessons[1].homework}`)
-    $('#tue_homework3').val(`${res.data[0].tuesday.lessons[2].homework}`)
-    $('#tue_homework4').val(`${res.data[0].tuesday.lessons[3].homework}`)
-    $('#tue_homework5').val(`${res.data[0].tuesday.lessons[4].homework}`)
-    $('#tue_homework6').val(`${res.data[0].tuesday.lessons[5].homework}`)
-    $('#tue_homework7').val(`${res.data[0].tuesday.lessons[6].homework}`)
-    $('#tue_homework8').val(`${res.data[0].tuesday.lessons[7].homework}`)
-
-    //Wednesday
-    $('#wed_homework1').val(`${res.data[0].wednesday.lessons[0].homework}`)
-    $('#wed_homework2').val(`${res.data[0].wednesday.lessons[1].homework}`)
-    $('#wed_homework3').val(`${res.data[0].wednesday.lessons[2].homework}`)
-    $('#wed_homework4').val(`${res.data[0].wednesday.lessons[3].homework}`)
-    $('#wed_homework5').val(`${res.data[0].wednesday.lessons[4].homework}`)
-    $('#wed_homework6').val(`${res.data[0].wednesday.lessons[5].homework}`)
-    $('#wed_homework7').val(`${res.data[0].wednesday.lessons[6].homework}`)
-    $('#wed_homework8').val(`${res.data[0].wednesday.lessons[7].homework}`)
-
-    //Thursday
-    $('#thu_subject1').val(`${res.data[0].thursday.lessons[0].homework}`)
-    $('#thu_subject2').val(`${res.data[0].thursday.lessons[1].homework}`)
-    $('#thu_subject3').val(`${res.data[0].thursday.lessons[2].homework}`)
-    $('#thu_subject4').val(`${res.data[0].thursday.lessons[3].homework}`)
-    $('#thu_subject5').val(`${res.data[0].thursday.lessons[4].homework}`)
-    $('#thu_subject6').val(`${res.data[0].thursday.lessons[5].homework}`)
-    $('#thu_subject7').val(`${res.data[0].thursday.lessons[6].homework}`)
-    $('#thu_subject8').val(`${res.data[0].thursday.lessons[7].homework}`)
-
-    //Friday
-    $('#fri_subject1').val(`${res.data[0].friday.lessons[0].homework}`)
-    $('#fri_subject2').val(`${res.data[0].friday.lessons[1].homework}`)
-    $('#fri_subject3').val(`${res.data[0].friday.lessons[2].homework}`)
-    $('#fri_subject4').val(`${res.data[0].friday.lessons[3].homework}`)
-    $('#fri_subject5').val(`${res.data[0].friday.lessons[4].homework}`)
-    $('#fri_subject6').val(`${res.data[0].friday.lessons[5].homework}`)
-    $('#fri_subject7').val(`${res.data[0].friday.lessons[6].homework}`)
-    $('#fri_subject8').val(`${res.data[0].friday.lessons[7].homework}`)
-})
+        // Populate inputs with the fetched homework data
+        ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'].forEach((day, index) => {
+            for (let i = 0; i < 8; i++) {
+                document.querySelector(`#${day.substring(0, 3)}_homework${i + 1}`).value = homework[day].lessons[i].homework;
+            }
+        });
+    })
+    .catch((error) => {
+        console.error('Error fetching homework:', error);
+    });
+});
