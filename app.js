@@ -71,6 +71,15 @@ bot.on('message', (msg) => {
         bot.sendMessage(userId, `New message from ${chatId}: ${message}`);
     }
 });
+app.get('/api/getHomework', async (req,res)=>{
+    try{
+        const homework = await Homework.find();
+        res.status(200).json(homework);
+    }
+    catch{
+        res.status(500).json({ message: 'Error when getting homework', error: err.message });
+    }
+})
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });

@@ -23,6 +23,8 @@ $('#nav_distribution').click(() => {
     $('#nav_events').removeClass('active_nav');
     $('#nav_distribution').addClass('active_nav');
 });
+
+//homework saving
 document.querySelector('.setChanges_btn').addEventListener('click', function() {
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
     const homeworkData = {};
@@ -71,3 +73,6 @@ function saveHomework(homeworkData) {
         console.error('Error:', error);
     });
 }
+
+//homework appending
+axios.get()
