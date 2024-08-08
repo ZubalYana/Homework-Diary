@@ -60,7 +60,7 @@ bot.on('message', async (msg) => {
                     thursday: 'Четвер',
                     friday: 'П’ятниця'
                 };
-                
+
                 let homeworkMessage = 'Домашнє завдання на тиждень:\n\n';
                 ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'].forEach(day => {
                     if (homework[day]) {
@@ -92,6 +92,7 @@ bot.on('message', async (msg) => {
         }
     };
 });
+
 
 app.post('/send', (req, res) => {
     console.log(req.body.message);
