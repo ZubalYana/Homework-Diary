@@ -109,4 +109,26 @@ axios.get('/api/getHomework')
     $('#wed_homework7').val(`${res.data[0].wednesday.lessons[6].homework}`)
     $('#wed_homework8').val(`${res.data[0].wednesday.lessons[7].homework}`)
 
+    //Thursday
+    $('#thu_subject1').val(`${res.data[0].thursday.lessons[0].homework}`)
+    $('#thu_subject2').val(`${res.data[0].thursday.lessons[1].homework}`)
+    $('#thu_subject3').val(`${res.data[0].thursday.lessons[2].homework}`)
+    $('#thu_subject4').val(`${res.data[0].thursday.lessons[3].homework}`)
+    $('#thu_subject5').val(`${res.data[0].thursday.lessons[4].homework}`)
+    $('#thu_subject6').val(`${res.data[0].thursday.lessons[5].homework}`)
+    $('#thu_subject7').val(`${res.data[0].thursday.lessons[6].homework}`)
+    $('#thu_subject8').val(`${res.data[0].thursday.lessons[7].homework}`)
+
+    //Friday
+    $('#fri_subject1').val(`${res.data[0].friday.lessons[0].homework}`)
+    $('#fri_subject2').val(`${res.data[0].friday.lessons[1].homework}`)
+    $('#fri_subject3').val(`${res.data[0].friday.lessons[2].homework}`)
+    $('#fri_subject4').val(`${res.data[0].friday.lessons[3].homework}`)
+    $('#fri_subject5').val(`${res.data[0].friday.lessons[4].homework}`)
+    $('#fri_subject6').val(`${res.data[0].friday.lessons[5].homework}`)
+    $('#fri_subject7').val(`${res.data[0].friday.lessons[6].homework}`)
+    $('#fri_subject8').val(`${res.data[0].friday.lessons[7].homework}`)
+
+
+
 })
