@@ -33,7 +33,38 @@ bot.onText(/\/start/, (msg) => {
         fs.writeFileSync(usersFilePath, JSON.stringify(users));
     }
 
-    bot.sendMessage(chatId, "\n Привіт! Бот активовано. \nОтримуйте всю інформацію про домашнє завдання, дедлайни та події! \nВажливо: при перенавантаженні серверу, можлива затримка повідомлення до кількох хвилин. \nУ разі виникнення будь-яких проблем у використанні чи недостачі інформаціЇ, повідомляйте: @yanavesq.");
+    const options = {
+        reply_markup: {
+          keyboard: [
+            [{ text: 'Button 1' }, { text: 'Button 2' }],
+            [{ text: 'Button 3' }]
+          ],
+          resize_keyboard: true
+        }
+      };
+    bot.sendMessage(chatId, '\n Привіт! Бот активовано. \nОтримуйте всю інформацію про домашнє завдання, дедлайни та події! \nВажливо: при перенавантаженні серверу, можлива затримка повідомлення до кількох хвилин. \nУ разі виникнення будь-яких проблем у використанні чи недостачі інформаціЇ, повідомляйте: @yanavesq.', options);
+});
+
+bot.on('message', (msg) => {
+    const chatId = msg.chat.id;
+
+    if (msg.text === 'Button 1') {
+        bot.sendMessage(chatId, 'You clicked: Button 1');
+    } else if (msg.text === 'Button 2') {
+        bot.sendMessage(chatId, 'You clicked: Button 2');
+    } else if (msg.text === 'Button 3') {
+        bot.sendMessage(chatId, 'You clicked: Button 3');
+    }
+
+    const options = {
+        reply_markup: {
+          keyboard: [
+            [{ text: 'Button 1' }, { text: 'Button 2' }],
+            [{ text: 'Button 3' }]
+          ],
+          resize_keyboard: true
+        }
+      };
 });
 app.post('/send', (req, res) => {
     console.log(req.body.message);
