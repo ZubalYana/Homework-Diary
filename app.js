@@ -36,8 +36,7 @@ bot.onText(/\/start/, (msg) => {
     const options = {
         reply_markup: {
           keyboard: [
-            [{ text: 'Button 1' }, { text: 'Button 2' }],
-            [{ text: 'Button 3' }]
+            [{ text: 'Домашнє завдання' }, { text: 'Події' }],
           ],
           resize_keyboard: true
         }
@@ -48,12 +47,10 @@ bot.onText(/\/start/, (msg) => {
 bot.on('message', (msg) => {
     const chatId = msg.chat.id;
 
-    if (msg.text === 'Button 1') {
+    if (msg.text === 'Домашнє завдання') {
         bot.sendMessage(chatId, 'You clicked: Button 1');
-    } else if (msg.text === 'Button 2') {
-        bot.sendMessage(chatId, 'You clicked: Button 2');
-    } else if (msg.text === 'Button 3') {
-        bot.sendMessage(chatId, 'You clicked: Button 3');
+    }else if (msg.text === 'Події') {
+        bot.sendMessage(chatId, 'На найблищий час подій не встановлено');
     }
 
     const options = {
@@ -109,7 +106,6 @@ app.post('/api/updateHomework', async (req, res) => {
         res.status(500).json({ error: 'Failed to update homework', details: error.message });
     }
 });
-
 bot.on('message', (msg) => {
     const userId = 1132590035;
     const chatId = msg.chat.id;
