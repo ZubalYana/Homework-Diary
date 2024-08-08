@@ -78,6 +78,8 @@ function saveHomework(homeworkData) {
 axios.get('/api/getHomework')
 .then((res)=>{
     console.log(res.data)
+
+    //Monday
     $('#mon_homework1').val(`${res.data[0].monday.lessons[0].homework}`)
     $('#mon_homework2').val(`${res.data[0].monday.lessons[1].homework}`)
     $('#mon_homework3').val(`${res.data[0].monday.lessons[2].homework}`)
@@ -86,4 +88,25 @@ axios.get('/api/getHomework')
     $('#mon_homework6').val(`${res.data[0].monday.lessons[5].homework}`)
     $('#mon_homework7').val(`${res.data[0].monday.lessons[6].homework}`)
     $('#mon_homework8').val(`${res.data[0].monday.lessons[7].homework}`)
+
+    //Tuesday
+    $('#tue_homework1').val(`${res.data[0].tuesday.lessons[0].homework}`)
+    $('#tue_homework2').val(`${res.data[0].tuesday.lessons[1].homework}`)
+    $('#tue_homework3').val(`${res.data[0].tuesday.lessons[2].homework}`)
+    $('#tue_homework4').val(`${res.data[0].tuesday.lessons[3].homework}`)
+    $('#tue_homework5').val(`${res.data[0].tuesday.lessons[4].homework}`)
+    $('#tue_homework6').val(`${res.data[0].tuesday.lessons[5].homework}`)
+    $('#tue_homework7').val(`${res.data[0].tuesday.lessons[6].homework}`)
+    $('#tue_homework8').val(`${res.data[0].tuesday.lessons[7].homework}`)
+
+    //Wednesday
+    $('#wed_homework1').val(`${res.data[0].wednesday.lessons[0].homework}`)
+    $('#wed_homework2').val(`${res.data[0].wednesday.lessons[1].homework}`)
+    $('#wed_homework3').val(`${res.data[0].wednesday.lessons[2].homework}`)
+    $('#wed_homework4').val(`${res.data[0].wednesday.lessons[3].homework}`)
+    $('#wed_homework5').val(`${res.data[0].wednesday.lessons[4].homework}`)
+    $('#wed_homework6').val(`${res.data[0].wednesday.lessons[5].homework}`)
+    $('#wed_homework7').val(`${res.data[0].wednesday.lessons[6].homework}`)
+    $('#wed_homework8').val(`${res.data[0].wednesday.lessons[7].homework}`)
+
 })
