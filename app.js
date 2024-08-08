@@ -62,6 +62,23 @@ app.post('/api/saveHomework', async (req, res) => {
         res.status(500).json({ error: 'Failed to save homework', details: error.message });
     }
 });
+app.post('/api/updateHomework', async (req, res) => {
+    try {
+        const { monday, tuesday, wednesday, thursday, friday } = req.body;
+        
+        const updatedHomework = await Homework.findOneAndUpdate(
+            {}, 
+            { monday, tuesday, wednesday, thursday, friday },
+            { new: true, upsert: true } 
+        );
+        
+        res.status(200).json({ message: 'Homework updated successfully!', updatedHomework });
+    } catch (error) {
+        console.error('Error updating homework:', error);
+        res.status(500).json({ error: 'Failed to update homework', details: error.message });
+    }
+});
+
 bot.on('message', (msg) => {
     const userId = 1132590035;
     const chatId = msg.chat.id;

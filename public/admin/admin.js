@@ -128,7 +128,4 @@ axios.get('/api/getHomework')
     $('#fri_subject6').val(`${res.data[0].friday.lessons[5].homework}`)
     $('#fri_subject7').val(`${res.data[0].friday.lessons[6].homework}`)
     $('#fri_subject8').val(`${res.data[0].friday.lessons[7].homework}`)
-
-
-
 })
