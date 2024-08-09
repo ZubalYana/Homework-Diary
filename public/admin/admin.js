@@ -57,7 +57,6 @@ document.querySelector('.setChanges_btn').addEventListener('click', function() {
     console.log(homeworkData);
     saveHomework(homeworkData);
 });
-
 function saveHomework(homeworkData) {
     fetch('/api/saveHomework', {
         method: 'POST',
@@ -112,6 +111,7 @@ document.querySelector('.setChanges_btn').addEventListener('click', function() {
     });
 
     saveHomework(homeworkData);
+    
 });
 
 function saveHomework(homeworkData) {

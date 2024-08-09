@@ -66,7 +66,7 @@ bot.on('message', async (msg) => {
                     if (homework[day]) {
                         homeworkMessage += `\n${daysInUkrainian[day]}:\n`;
                         homework[day].lessons.forEach((lesson, index) => {
-                            homeworkMessage += `  Урок ${index + 1}: ${lesson.subject ? lesson.subject + ': ' : ''}${lesson.homework}\n`;
+                            homeworkMessage += ` ${index + 1}. ${lesson.subject ? lesson.subject + ': ' : ''}${lesson.homework}\n`;
                         });
                     }
                 });
@@ -93,7 +93,6 @@ bot.on('message', async (msg) => {
     };
 });
 
-
 app.post('/send', (req, res) => {
     console.log(req.body.message);
     const message = req.body.message;
@@ -104,6 +103,10 @@ app.post('/send', (req, res) => {
 
     res.sendStatus(200);
 });
+
+// app.post('/updatingMessage', (req,res)=>{
+//     bot.sendMessage(chatId, '\n Привіт! Бот активовано. \nОтримуйте всю інформацію про домашнє завдання, дедлайни та події! \nВажливо: при перенавантаженні серверу, можлива затримка повідомлення до кількох хвилин. \nУ разі виникнення будь-яких проблем у використанні чи недостачі інформаціЇ, повідомляйте: @yanavesq.', options);
+// })
 
 app.post('/api/saveHomework', async (req, res) => {
     try {
