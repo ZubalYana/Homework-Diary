@@ -25,38 +25,36 @@ $('#nav_distribution').click(() => {
 });
 
 //homework saving
-document.querySelector('.setChanges_btn').addEventListener('click', function() {
+$('.setChanges_btn').click(()=>{
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
     const homeworkData = {};
-
-    function parseDate(dateStr) {
-        const [day, month] = dateStr.split('.');
-        const year = new Date().getFullYear();
-        return new Date(`${year}-${month}-${day}`);
-    }
 
     days.forEach(day => {
         const dayElement = document.getElementById(day);
         const lessons = [];
         for (let i = 1; i <= 8; i++) {
             const subjectElement = dayElement.querySelector(`#${day.toLowerCase().slice(0, 3)}_subject${i}`);
+            // console.log(subjectElement.innerText)
             const homeworkElement = dayElement.querySelector(`#${day.toLowerCase().slice(0, 3)}_homework${i}`);
 
             if (subjectElement && homeworkElement) {
-                const subject = subjectElement.innerText.replace(':', '');
+                const subject = subjectElement.innerText;
                 const homework = homeworkElement.value;
                 lessons.push({ subject, homework });
+                // console.log(lessons)
             }
         }
         homeworkData[day.toLowerCase()] = {
-            date: parseDate(dayElement.querySelector('.date').innerText),
             lessons: lessons
         };
+        console.log(homeworkData)
     });
 
-    console.log(homeworkData);
     saveHomework(homeworkData);
-});
+})
+
+
+
 function saveHomework(homeworkData) {
     fetch('/api/saveHomework', {
         method: 'POST',
