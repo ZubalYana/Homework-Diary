@@ -53,25 +53,6 @@ $('.setChanges_btn').click(()=>{
     saveHomework(homeworkData);
 })
 
-
-
-function saveHomework(homeworkData) {
-    fetch('/api/saveHomework', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(homeworkData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success:', data);
-    })
-    .catch((error) => {
-        console.error('Error:', error);
-    });
-}
-
 //homework displaying
 document.addEventListener('DOMContentLoaded', (event) => {
     axios.get('/api/getHomework')
@@ -113,6 +94,7 @@ document.querySelector('.setChanges_btn').addEventListener('click', function() {
 });
 
 function saveHomework(homeworkData) {
+    console.log(homeworkData)
     fetch('/api/updateHomework', {
         method: 'POST',
         headers: {

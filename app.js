@@ -128,6 +128,7 @@ app.post('/api/saveHomework', async (req, res) => {
 
 app.post('/api/updateHomework', async (req, res) => {
     try {
+        console.log(req.body)
         const { monday, tuesday, wednesday, thursday, friday } = req.body;
 
         const updatedHomework = await Homework.findOneAndUpdate(
