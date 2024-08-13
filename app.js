@@ -48,8 +48,6 @@ bot.onText(/\/start/, (msg) => {
 
 bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
-
-    // Define the schedule for each day
     const schedule = {
         monday: [
             { subject: 'Математика' },
@@ -102,7 +100,6 @@ bot.on('message', async (msg) => {
             { subject: 'Інформатика' },
         ]
     };
-
     if (msg.text === 'Домашнє завдання') {
         try {
             const homework = await Homework.findOne().lean();
@@ -146,7 +143,6 @@ bot.on('message', async (msg) => {
     } else if (msg.text === 'Події') {
         bot.sendMessage(chatId, 'На найблищий час подій не встановлено');
     }
-
     const options = {
         reply_markup: {
             keyboard: [

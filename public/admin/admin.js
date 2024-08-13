@@ -24,6 +24,67 @@ $('#nav_distribution').click(() => {
     $('#nav_distribution').addClass('active_nav');
 });
 
+//schedule
+const schedule = {
+    monday: [
+        { subject: 'Математика' },
+        { subject: 'Українська мова' },
+        { subject: 'Фізика' },
+        { subject: 'Англійська мова' },
+        { subject: 'Біологія' },
+        { subject: 'Історія' },
+        { subject: 'Хімія' },
+        { subject: 'Музика' }
+    ],
+    tuesday: [
+        { subject: 'Хімія' },
+        { subject: 'Історія' },
+        { subject: 'Англійська мова' },
+        { subject: 'Англійська мова' },
+        { subject: 'Англійська мова' },
+        { subject: 'Англійська мова' },
+        { subject: 'Англійська мова' },
+        { subject: 'Англійська мова' },
+    ],
+    wednesday: [
+        { subject: 'Біологія' },
+        { subject: 'Географія' },
+        { subject: 'Музика' },
+        { subject: 'Географія' },
+        { subject: 'Географія' },
+        { subject: 'Географія' },
+        { subject: 'Географія' },
+        { subject: 'Географія' },
+    ],
+    thursday: [
+        { subject: 'Фізкультура' },
+        { subject: 'Інформатика' },
+        { subject: 'Література' },
+        { subject: 'Фізкультура' },
+        { subject: 'Фізкультура' },
+        { subject: 'Фізкультура' },
+        { subject: 'Фізкультура' },
+        { subject: 'Фізкультура' },
+    ],
+    friday: [
+        { subject: 'Трудове навчання' },
+        { subject: 'Етика' },
+        { subject: 'Захист Вітчизни' },
+        { subject: 'Етика' },
+        { subject: 'Захист Вітчизни' },
+        { subject: 'Інформатика' },
+        { subject: 'Інформатика' },
+        { subject: 'Інформатика' },
+    ]
+};
+
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    updateSchedule(schedule);
+    // Other code for fetching and displaying homework
+});
+
+
 //homework saving
 $('.setChanges_btn').click(()=>{
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
@@ -92,7 +153,6 @@ document.querySelector('.setChanges_btn').addEventListener('click', function() {
     saveHomework(homeworkData);
     
 });
-
 function saveHomework(homeworkData) {
     console.log(homeworkData)
     fetch('/api/updateHomework', {
@@ -110,3 +170,28 @@ function saveHomework(homeworkData) {
         console.error('Error:', error);
     });
 }
+
+//schedule updating
+function updateSchedule(schedule) {
+    const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+
+    days.forEach(day => {
+        const daySchedule = schedule[day];
+        daySchedule.forEach((lesson, index) => {
+            const subjectElement = document.querySelector(`#${day.substring(0, 3)}_subject${index + 1}`);
+            const homeworkElement = document.querySelector(`#${day.substring(0, 3)}_homework${index + 1}`);
+
+            if (subjectElement) {
+                subjectElement.textContent = lesson.subject ? lesson.subject + ':' : 'Вільний урок:';
+            }
+            if (homeworkElement) {
+                homeworkElement.placeholder = lesson.homework || 'some homework';
+            }
+        });
+    });
+}
+
+// Call this function after the DOM content is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    updateSchedule(schedule);  // Assuming 'schedule' is available in the scope
+});
