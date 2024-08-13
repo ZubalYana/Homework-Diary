@@ -49,6 +49,60 @@ bot.onText(/\/start/, (msg) => {
 bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
 
+    // Define the schedule for each day
+    const schedule = {
+        monday: [
+            { subject: 'Математика' },
+            { subject: 'Українська мова' },
+            { subject: 'Фізика' },
+            { subject: 'Англійська мова' },
+            { subject: 'Біологія' },
+            { subject: 'Історія' },
+            { subject: 'Хімія' },
+            { subject: 'Музика' }
+        ],
+        tuesday: [
+            { subject: 'Хімія' },
+            { subject: 'Історія' },
+            { subject: 'Англійська мова' },
+            { subject: 'Англійська мова' },
+            { subject: 'Англійська мова' },
+            { subject: 'Англійська мова' },
+            { subject: 'Англійська мова' },
+            { subject: 'Англійська мова' },
+        ],
+        wednesday: [
+            { subject: 'Біологія' },
+            { subject: 'Географія' },
+            { subject: 'Музика' },
+            { subject: 'Географія' },
+            { subject: 'Географія' },
+            { subject: 'Географія' },
+            { subject: 'Географія' },
+            { subject: 'Географія' },
+        ],
+        thursday: [
+            { subject: 'Фізкультура' },
+            { subject: 'Інформатика' },
+            { subject: 'Література' },
+            { subject: 'Фізкультура' },
+            { subject: 'Фізкультура' },
+            { subject: 'Фізкультура' },
+            { subject: 'Фізкультура' },
+            { subject: 'Фізкультура' },
+        ],
+        friday: [
+            { subject: 'Трудове навчання' },
+            { subject: 'Етика' },
+            { subject: 'Захист Вітчизни' },
+            { subject: 'Етика' },
+            { subject: 'Захист Вітчизни' },
+            { subject: 'Інформатика' },
+            { subject: 'Інформатика' },
+            { subject: 'Інформатика' },
+        ]
+    };
+
     if (msg.text === 'Домашнє завдання') {
         try {
             const homework = await Homework.findOne().lean();
@@ -61,13 +115,24 @@ bot.on('message', async (msg) => {
                     friday: 'П’ятниця'
                 };
 
-                let homeworkMessage = 'Домашнє завдання на тиждень:\n\n';
+                let homeworkMessage = 'Домашнє завдання та розклад на тиждень:\n\n';
                 ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'].forEach(day => {
-                    if (homework[day]) {
+                    if (homework[day] || schedule[day]) {
                         homeworkMessage += `\n${daysInUkrainian[day]}:\n`;
-                        homework[day].lessons.forEach((lesson, index) => {
-                            homeworkMessage += ` ${index + 1}. ${lesson.subject ? lesson.subject + ': ' : ''}${lesson.homework}\n`;
-                        });
+                        
+                        // Add schedule
+                        if (schedule[day]) {
+                            schedule[day].forEach((lesson, index) => {
+                                homeworkMessage += ` ${index + 1}. ${lesson.subject ? lesson.subject + ': ' : ''}`;
+                                
+                                // Add homework if exists
+                                if (homework[day] && homework[day].lessons[index] && homework[day].lessons[index].homework) {
+                                    homeworkMessage += `${homework[day].lessons[index].homework}`;
+                                }
+                                
+                                homeworkMessage += `\n`;
+                            });
+                        }
                     }
                 });
                 bot.sendMessage(chatId, homeworkMessage);
@@ -93,6 +158,7 @@ bot.on('message', async (msg) => {
     };
 });
 
+
 app.post('/send', (req, res) => {
     console.log(req.body.message);
     const message = req.body.message;
@@ -103,10 +169,6 @@ app.post('/send', (req, res) => {
 
     res.sendStatus(200);
 });
-
-// app.post('/updatingMessage', (req,res)=>{
-//     bot.sendMessage(chatId, '\n Привіт! Бот активовано. \nОтримуйте всю інформацію про домашнє завдання, дедлайни та події! \nВажливо: при перенавантаженні серверу, можлива затримка повідомлення до кількох хвилин. \nУ разі виникнення будь-яких проблем у використанні чи недостачі інформаціЇ, повідомляйте: @yanavesq.', options);
-// })
 
 app.post('/api/saveHomework', async (req, res) => {
     try {
