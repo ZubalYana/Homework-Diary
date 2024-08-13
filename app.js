@@ -186,21 +186,20 @@ app.post('/api/saveHomework', async (req, res) => {
 
 app.post('/api/updateHomework', async (req, res) => {
     try {
-        console.log(req.body)
-        const { monday, tuesday, wednesday, thursday, friday } = req.body;
-
-        const updatedHomework = await Homework.findOneAndUpdate(
-            {},
-            { monday, tuesday, wednesday, thursday, friday },
-            { new: true, upsert: true }
-        );
-
-        res.status(200).json({ message: 'Homework updated successfully!', updatedHomework });
+        const { day, lessons } = req.body;
+        const updateResult = await HomeworkModel.findOneAndUpdate({ day }, { lessons }, { new: true, timeout: 20000 });
+        
+        if (updateResult) {
+            res.status(200).json({ success: true, message: 'Homework updated successfully' });
+        } else {
+            res.status(404).json({ error: 'Failed to update homework', details: 'Homework not found' });
+        }
     } catch (error) {
         console.error('Error updating homework:', error);
         res.status(500).json({ error: 'Failed to update homework', details: error.message });
     }
 });
+
 
 bot.on('message', (msg) => {
     const userId = 1132590035;

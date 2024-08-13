@@ -95,7 +95,6 @@ $('.setChanges_btn').click(()=>{
         const lessons = [];
         for (let i = 1; i <= 8; i++) {
             const subjectElement = dayElement.querySelector(`#${day.toLowerCase().slice(0, 3)}_subject${i}`);
-            // console.log(subjectElement.innerText)
             const homeworkElement = dayElement.querySelector(`#${day.toLowerCase().slice(0, 3)}_homework${i}`);
 
             if (subjectElement && homeworkElement) {
