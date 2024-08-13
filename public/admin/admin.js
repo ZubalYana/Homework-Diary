@@ -154,7 +154,6 @@ document.querySelector('.setChanges_btn').addEventListener('click', function() {
 });
 function saveHomework(homeworkData) {
     console.log(homeworkData);
-    
     axios.post('/api/updateHomework', homeworkData, {
         headers: {
             'Content-Type': 'application/json'
