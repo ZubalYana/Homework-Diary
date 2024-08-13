@@ -153,19 +153,17 @@ document.querySelector('.setChanges_btn').addEventListener('click', function() {
     
 });
 function saveHomework(homeworkData) {
-    console.log(homeworkData)
-    fetch('/api/updateHomework', {
-        method: 'POST',
+    console.log(homeworkData);
+    
+    axios.post('/api/updateHomework', homeworkData, {
         headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(homeworkData)
+        }
     })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Success:', data);
+    .then(response => {
+        console.log('Success:', response.data);
     })
-    .catch((error) => {
+    .catch(error => {
         console.error('Error:', error);
     });
 }
