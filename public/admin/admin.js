@@ -78,12 +78,10 @@ const schedule = {
     ]
 };
 
-
 document.addEventListener('DOMContentLoaded', (event) => {
     updateSchedule(schedule);
     // Other code for fetching and displaying homework
 });
-
 
 //homework saving
 $('.setChanges_btn').click(()=>{
@@ -186,8 +184,6 @@ function updateSchedule(schedule) {
         });
     });
 }
-
-// Call this function after the DOM content is loaded
 document.addEventListener('DOMContentLoaded', () => {
     updateSchedule(schedule);  // Assuming 'schedule' is available in the scope
 });

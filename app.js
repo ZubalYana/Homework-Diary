@@ -24,10 +24,8 @@ mongoose.connect(`mongodb+srv://zubalana0:${process.env.PASSWORD}@cluster0.niyre
 if (fs.existsSync(usersFilePath)) {
     users = JSON.parse(fs.readFileSync(usersFilePath, 'utf8'));
 }
-
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
-
 bot.onText(/\/start/, (msg) => {
     const chatId = msg.chat.id;
     if (!users.includes(chatId)) {
@@ -45,7 +43,6 @@ bot.onText(/\/start/, (msg) => {
     };
     bot.sendMessage(chatId, '\n Привіт! Бот активовано. \nОтримуйте всю інформацію про домашнє завдання, дедлайни та події! \nВажливо: при перенавантаженні серверу, можлива затримка повідомлення до кількох хвилин. \nУ разі виникнення будь-яких проблем у використанні чи недостачі інформаціЇ, повідомляйте: @yanavesq.', options);
 });
-
 bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
     const schedule = {
@@ -151,8 +148,6 @@ bot.on('message', async (msg) => {
         }
     };
 });
-
-
 app.post('/send', (req, res) => {
     console.log(req.body.message);
     const message = req.body.message;
@@ -163,7 +158,6 @@ app.post('/send', (req, res) => {
 
     res.sendStatus(200);
 });
-
 app.post('/api/saveHomework', async (req, res) => {
     try {
         const { monday, tuesday, wednesday, thursday, friday } = req.body;
@@ -181,7 +175,6 @@ app.post('/api/saveHomework', async (req, res) => {
         res.status(500).json({ error: 'Failed to save homework', details: error.message });
     }
 });
-
 app.post('/api/updateHomework', async (req, res) => {
     try {
         const { monday, tuesday, wednesday, thursday, friday } = req.body;
@@ -202,9 +195,6 @@ app.post('/api/updateHomework', async (req, res) => {
         res.status(500).json({ error: 'Failed to update homework', details: error.message });
     }
 });
-
-
-
 bot.on('message', (msg) => {
     const userId = 1132590035;
     const chatId = msg.chat.id;
@@ -214,7 +204,6 @@ bot.on('message', (msg) => {
         bot.sendMessage(userId, `New message from ${chatId}: ${message}`);
     }
 });
-
 app.get('/api/getHomework', async (req, res) => {
     try {
         const homework = await Homework.find();
@@ -223,15 +212,12 @@ app.get('/api/getHomework', async (req, res) => {
         res.status(500).json({ message: 'Error when getting homework', error: err.message });
     }
 });
-
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
-
 app.get('/admin', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'admin', 'admin.html'));
 });
-
 app.listen(PORT, () => {
     console.log(`Server running on PORT: ${PORT}`);
 });
