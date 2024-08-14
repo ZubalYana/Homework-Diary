@@ -117,12 +117,10 @@ bot.on('message', async (msg) => {
                     if (homework[day] || schedule[day]) {
                         homeworkMessage += `\n${daysInUkrainian[day]}:\n`;
                         
-                        // Add schedule
                         if (schedule[day]) {
                             schedule[day].forEach((lesson, index) => {
                                 homeworkMessage += ` ${index + 1}. ${lesson.subject ? lesson.subject + ': ' : ''}`;
                                 
-                                // Add homework if exists
                                 if (homework[day] && homework[day].lessons[index] && homework[day].lessons[index].homework) {
                                     homeworkMessage += `${homework[day].lessons[index].homework}`;
                                 }
