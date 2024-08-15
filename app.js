@@ -136,7 +136,7 @@ bot.on('message', async (msg) => {
             bot.sendMessage(chatId, 'Сталася помилка при отриманні домашнього завдання.');
         }
     } else if (msg.text === 'Події') {
-        bot.sendMessage(chatId, 'На найблищий час подій не встановлено');
+        bot.sendMessage(chatId, 'Найблищі події: \n 1 вересня, неділя: початок навчального року. \n Детальніша інформація з\'явиться блище до кінця серпня.');
     }
     const options = {
         reply_markup: {
