@@ -122,6 +122,9 @@
   color: #fff;
   font-size: 16px;
   font-weight: 200;
+  background-color: #00796b;
+  border: none;
+  outline: none;
 }
 .wrap .homework .daysContainer .day .string .homework {
   width: 65%;
