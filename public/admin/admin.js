@@ -185,5 +185,5 @@ function updateSchedule(schedule) {
     });
 }
 document.addEventListener('DOMContentLoaded', () => {
-    updateSchedule(schedule);  // Assuming 'schedule' is available in the scope
+    updateSchedule(schedule);  
 });
