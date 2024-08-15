@@ -97,6 +97,7 @@ bot.on('message', async (msg) => {
             { subject: 'Інформатика' },
         ]
     };
+
     if (msg.text === 'Домашнє завдання') {
         try {
             const homework = await Homework.findOne().lean();
@@ -109,14 +110,14 @@ bot.on('message', async (msg) => {
                     friday: 'П’ятниця'
                 };
 
-                let homeworkMessage = 'Домашнє завдання та розклад на тиждень:\n\n';
+                let homeworkMessage = '<b>Домашнє завдання та розклад на тиждень:</b>\n\n';
                 ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'].forEach(day => {
                     if (homework[day] || schedule[day]) {
-                        homeworkMessage += `\n${daysInUkrainian[day]}:\n`;
+                        homeworkMessage += `\n<b>${daysInUkrainian[day]}:</b>\n`;
                         
                         if (schedule[day]) {
                             schedule[day].forEach((lesson, index) => {
-                                homeworkMessage += ` ${index + 1}. ${lesson.subject ? lesson.subject + ': ' : ''}`;
+                                homeworkMessage += ` ${index + 1}. <b>${lesson.subject ? lesson.subject + ': ' : ''}</b>`;
                                 
                                 if (homework[day] && homework[day].lessons[index] && homework[day].lessons[index].homework) {
                                     homeworkMessage += `${homework[day].lessons[index].homework}`;
@@ -127,17 +128,19 @@ bot.on('message', async (msg) => {
                         }
                     }
                 });
-                bot.sendMessage(chatId, homeworkMessage);
+
+                bot.sendMessage(chatId, homeworkMessage, { parse_mode: 'HTML' }); 
             } else {
-                bot.sendMessage(chatId, 'Домашнє завдання не знайдено.');
+                bot.sendMessage(chatId, 'Домашнє завдання не знайдено.', { parse_mode: 'HTML' });
             }
         } catch (error) {
             console.error('Error retrieving homework:', error);
-            bot.sendMessage(chatId, 'Сталася помилка при отриманні домашнього завдання.');
+            bot.sendMessage(chatId, 'Сталася помилка при отриманні домашнього завдання.', { parse_mode: 'HTML' });
         }
     } else if (msg.text === 'Події') {
-        bot.sendMessage(chatId, 'Найблищі події: \n<b>1 вересня, неділя:</b> початок навчального року. \nДетальніша інформація з\'явиться блище до кінця серпня.');
+        bot.sendMessage(chatId, 'Найблищі події: \n<b>1 вересня, неділя:</b> початок навчального року. \nДетальніша інформація з\'явиться блище до кінця серпня.', { parse_mode: 'HTML' });
     }
+    
     const options = {
         reply_markup: {
             keyboard: [
@@ -148,6 +151,7 @@ bot.on('message', async (msg) => {
         }
     };
 });
+
 app.post('/send', (req, res) => {
     console.log(req.body.message);
     const message = req.body.message;
