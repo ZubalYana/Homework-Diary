@@ -35,4 +35,45 @@
   .wrap .homework .afterButtonSpace {
     height: 40px;
   }
+}
+@media screen and (max-device-width: 375px) {
+  .wrap .header {
+    align-items: center;
+  }
+  .wrap .header .nav {
+    display: none;
+  }
+  .wrap .header #adminsettings {
+    display: none;
+  }
+  .wrap .header .burger {
+    width: 40px;
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .wrap .header .burger .row {
+    width: 100%;
+    height: 4px;
+    border-radius: 5px;
+    background-color: #212121;
+  }
+  .wrap .homework .daysContainer {
+    flex-direction: column;
+    height: 1620px;
+    width: 100%;
+    overflow: hidden;
+  }
+  .wrap .homework .daysContainer .day {
+    width: 100%;
+  }
+  .wrap .homework .setChanges_btn {
+    width: 200px;
+    height: 60px;
+    font-size: 32px;
+  }
+  .wrap .homework .afterButtonSpace {
+    height: 40px;
+  }
 }/*# sourceMappingURL=adminAdapt.css.map */
