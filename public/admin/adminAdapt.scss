@@ -22,5 +22,13 @@
                 }
             }
         }
+        .homework{
+            .daysContainer{
+                flex-direction: column;
+                height: 1620px;
+                width: 100%;
+                overflow: hidden;
+            }
+        }
     } 
 }

@@ -21,4 +21,10 @@
     border-radius: 5px;
     background-color: #212121;
   }
+  .wrap .homework .daysContainer {
+    flex-direction: column;
+    height: 1620px;
+    width: 100%;
+    overflow: hidden;
+  }
 }/*# sourceMappingURL=adminAdapt.css.map */
