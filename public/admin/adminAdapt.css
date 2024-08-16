@@ -31,6 +31,8 @@
     width: 200px;
     height: 60px;
     font-size: 32px;
-    margin-bottom: 100px;
+  }
+  .wrap .homework .afterButtonSpace {
+    height: 40px;
   }
 }/*# sourceMappingURL=adminAdapt.css.map */
