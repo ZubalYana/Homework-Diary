@@ -24,7 +24,6 @@ $('#nav_distribution').click(() => {
     $('#nav_distribution').addClass('active_nav');
 });
 
-//schedule
 const schedule = {
     monday: [
         { subject: 'Розклад' },
@@ -78,13 +77,48 @@ const schedule = {
     ]
 };
 
-document.addEventListener('DOMContentLoaded', (event) => {
-    updateSchedule(schedule);
-    // Other code for fetching and displaying homework
+$(document).ready(function() {
+    function populateSchedule() {
+        schedule.monday.forEach((item, index) => {
+            $(`#mon_subject${index + 1}`).val(item.subject);
+        });
+        schedule.tuesday.forEach((item, index) => {
+            $(`#tue_subject${index + 1}`).val(item.subject);
+        });
+        schedule.wednesday.forEach((item, index) => {
+            $(`#wed_subject${index + 1}`).val(item.subject);
+        });
+        schedule.thursday.forEach((item, index) => {
+            $(`#thu_subject${index + 1}`).val(item.subject);
+        });
+        schedule.friday.forEach((item, index) => {
+            $(`#fri_subject${index + 1}`).val(item.subject);
+        });
+    }
+    populateSchedule();
+
+    $('.setChanges_btn').click(function() {
+        schedule.monday.forEach((item, index) => {
+            item.subject = $(`#mon_subject${index + 1}`).val();
+        });
+        schedule.tuesday.forEach((item, index) => {
+            item.subject = $(`#tue_subject${index + 1}`).val();
+        });
+        schedule.wednesday.forEach((item, index) => {
+            item.subject = $(`#wed_subject${index + 1}`).val();
+        });
+        schedule.thursday.forEach((item, index) => {
+            item.subject = $(`#thu_subject${index + 1}`).val();
+        });
+        schedule.friday.forEach((item, index) => {
+            item.subject = $(`#fri_subject${index + 1}`).val();
+        });
+        console.log('Updated Schedule:', schedule);
+    });
 });
 
-//homework saving
-$('.setChanges_btn').click(()=>{
+// Homework saving and updating
+$('.setChanges_btn').click(() => {
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
     const homeworkData = {};
 
@@ -96,60 +130,19 @@ $('.setChanges_btn').click(()=>{
             const homeworkElement = dayElement.querySelector(`#${day.toLowerCase().slice(0, 3)}_homework${i}`);
 
             if (subjectElement && homeworkElement) {
-                const subject = subjectElement.innerText;
                 const homework = homeworkElement.value;
-                lessons.push({ subject, homework });
-                // console.log(lessons)
+                lessons.push({ homework });
             }
         }
         homeworkData[day.toLowerCase()] = {
             lessons: lessons
         };
-        console.log(homeworkData)
     });
 
     saveHomework(homeworkData);
-})
-
-//homework displaying
-document.addEventListener('DOMContentLoaded', (event) => {
-    axios.get('/api/getHomework')
-    .then((res) => {
-        const homework = res.data[0];
-        ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'].forEach((day, index) => {
-            for (let i = 0; i < 8; i++) {
-                document.querySelector(`#${day.substring(0, 3)}_homework${i + 1}`).value = homework[day].lessons[i].homework;
-            }
-        });
-    })
-    .catch((error) => {
-        console.error('Error fetching homework:', error);
-    });
 });
 
-//homework updating
-document.querySelector('.setChanges_btn').addEventListener('click', function() {
-    const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
-    const homeworkData = {};
-
-    days.forEach(day => {
-        const dayElement = document.getElementById(day.charAt(0).toUpperCase() + day.slice(1));
-        const lessons = [];
-        for (let i = 1; i <= 8; i++) {
-            const homeworkElement = dayElement.querySelector(`#${day.substring(0, 3)}_homework${i}`);
-            if (homeworkElement) {
-                const homework = homeworkElement.value;
-                lessons.push({ homework });
-            }
-        }
-        homeworkData[day] = {
-            lessons: lessons
-        };
-    });
-
-    saveHomework(homeworkData);
-    
-});
+// Function to save homework (no subject saving)
 function saveHomework(homeworkData) {
     console.log(homeworkData);
     axios.post('/api/updateHomework', homeworkData, {
@@ -165,7 +158,23 @@ function saveHomework(homeworkData) {
     });
 }
 
-//schedule updating
+// Homework displaying
+document.addEventListener('DOMContentLoaded', (event) => {
+    axios.get('/api/getHomework')
+    .then((res) => {
+        const homework = res.data[0];
+        ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'].forEach((day, index) => {
+            for (let i = 0; i < 8; i++) {
+                document.querySelector(`#${day.substring(0, 3)}_homework${i + 1}`).value = homework[day].lessons[i].homework;
+            }
+        });
+    })
+    .catch((error) => {
+        console.error('Error fetching homework:', error);
+    });
+});
+
+// Schedule updating only on the frontend
 function updateSchedule(schedule) {
     const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
 
@@ -184,6 +193,7 @@ function updateSchedule(schedule) {
         });
     });
 }
+
 document.addEventListener('DOMContentLoaded', () => {
     updateSchedule(schedule);  
 });
