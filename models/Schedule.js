@@ -1,16 +1,12 @@
 const mongoose = require('mongoose');
 
-const scheduleSchema = new mongoose.Schema({
-    subject: { type: String, required: true },
-    // startTime: { type: String, required: true },
-    // endTime: { type: String, required: true } 
+const ScheduleSchema = new mongoose.Schema({
+    monday: [{ subject: String }],
+    tuesday: [{ subject: String }],
+    wednesday: [{ subject: String }],
+    thursday: [{ subject: String }],
+    friday: [{ subject: String }],
 });
 
-const dayScheduleSchema = new mongoose.Schema({
-    date: { type: Date, required: true, unique: true, index: true },
-    subjects: [scheduleSchema]
-});
-
-const weekScheduleSchema = new mongoose.Schema({
-    days: [dayScheduleSchema]
-});
+const Schedule = mongoose.model('Schedule', ScheduleSchema);
+module.exports = Schedule;
