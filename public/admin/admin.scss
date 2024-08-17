@@ -33,12 +33,10 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-  
       .logo {
         font-size: 36px;
         font-weight: 700;
       }
-  
       .nav {
         width: 350px;
         font-size: 20px;
@@ -58,13 +56,11 @@
           color: #00796b;
         }
       }
-  
       #adminsettings {
         font-size: 24px;
         cursor: pointer;
         transition: 0.4s ease-in-out;
       }
-  
       #adminsettings:hover {
         color: #00796b;
       }
