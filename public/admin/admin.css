@@ -66,6 +66,9 @@
 .wrap .header .nav .nav_link:hover {
   color: #00796b;
 }
+.wrap .header .burger {
+  display: none;
+}
 .wrap .header #adminsettings {
   font-size: 24px;
   cursor: pointer;
