@@ -199,6 +199,18 @@ app.post('/api/updateHomework', async (req, res) => {
         res.status(500).json({ error: 'Failed to update homework', details: error.message });
     }
 });
+app.post('/api/updateSchedule', (req, res) => {
+    const scheduleData = req.body;
+
+    Schedule.findOneAndUpdate({}, scheduleData, { upsert: true, new: true })
+        .then(updatedSchedule => {
+            res.json({ message: 'Schedule updated successfully', updatedSchedule });
+        })
+        .catch(error => {
+            console.error('Error updating schedule:', error);
+            res.status(500).json({ message: 'Failed to update schedule' });
+        });
+});
 bot.on('message', (msg) => {
     const userId = 1132590035;
     const chatId = msg.chat.id;
