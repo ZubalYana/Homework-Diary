@@ -46,63 +46,12 @@ bot.onText(/\/start/, (msg) => {
 });
 bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
-    const schedule = {
-        monday: [
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' }
-        ],
-        tuesday: [
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-        ],
-        wednesday: [
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-        ],
-        thursday: [
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-        ],
-        friday: [
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-            { subject: 'Розклад' },
-        ]
-    };
-
     if (msg.text === 'Домашнє завдання') {
         try {
             const homework = await Homework.findOne().lean();
-            if (homework) {
+            const schedule = await Schedule.findOne().lean();
+
+            if (homework && schedule) {
                 const daysInUkrainian = {
                     monday: 'Понеділок',
                     tuesday: 'Вівторок',
@@ -132,16 +81,15 @@ bot.on('message', async (msg) => {
 
                 bot.sendMessage(chatId, homeworkMessage, { parse_mode: 'HTML' }); 
             } else {
-                bot.sendMessage(chatId, 'Домашнє завдання не знайдено.', { parse_mode: 'HTML' });
+                bot.sendMessage(chatId, 'Домашнє завдання або розклад не знайдено.', { parse_mode: 'HTML' });
             }
         } catch (error) {
-            console.error('Error retrieving homework:', error);
-            bot.sendMessage(chatId, 'Сталася помилка при отриманні домашнього завдання.', { parse_mode: 'HTML' });
+            console.error('Error retrieving homework or schedule:', error);
+            bot.sendMessage(chatId, 'Сталася помилка при отриманні домашнього завдання або розкладу.', { parse_mode: 'HTML' });
         }
     } else if (msg.text === 'Події') {
         bot.sendMessage(chatId, 'Найблищі події: \n<b>1 вересня, неділя:</b> початок навчального року. \nДетальніша інформація з\'явиться блище до кінця серпня.', { parse_mode: 'HTML' });
-    }
-    
+    } 
     const options = {
         reply_markup: {
             keyboard: [
@@ -238,7 +186,6 @@ app.get('/api/getSchedule', (req, res) => {
             res.status(500).json({ message: 'Failed to fetch schedule' });
         });
 });
-
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
