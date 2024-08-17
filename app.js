@@ -228,6 +228,17 @@ app.get('/api/getHomework', async (req, res) => {
         res.status(500).json({ message: 'Error when getting homework', error: err.message });
     }
 });
+app.get('/api/getSchedule', (req, res) => {
+    Schedule.findOne({})
+        .then(schedule => {
+            res.json(schedule);
+        })
+        .catch(error => {
+            console.error('Error fetching schedule:', error);
+            res.status(500).json({ message: 'Failed to fetch schedule' });
+        });
+});
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
