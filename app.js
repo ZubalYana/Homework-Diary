@@ -14,6 +14,7 @@ const mongoose = require('mongoose');
 const env = require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 const Homework = require('./models/Homework');
+const Schedule = require('./models/Schedule');
 mongoose.connect(`mongodb+srv://zubalana0:${process.env.PASSWORD}@cluster0.niyre.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`)
     .then(() => {
         console.log('Connected to MongoDB');
@@ -151,7 +152,6 @@ bot.on('message', async (msg) => {
         }
     };
 });
-
 app.post('/send', (req, res) => {
     console.log(req.body.message);
     const message = req.body.message;

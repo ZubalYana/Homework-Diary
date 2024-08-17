@@ -24,59 +24,6 @@ $('#nav_distribution').click(() => {
     $('#nav_distribution').addClass('active_nav');
 });
 
-const schedule = {
-    monday: [
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' }
-    ],
-    tuesday: [
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-    ],
-    wednesday: [
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-    ],
-    thursday: [
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-    ],
-    friday: [
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-        { subject: 'Розклад' },
-    ]
-};
-
 $(document).ready(function() {
     function populateSchedule() {
         schedule.monday.forEach((item, index) => {
@@ -117,30 +64,54 @@ $(document).ready(function() {
     });
 });
 
-// Homework saving and updating
+// Homework | Schedule saving and updating
 $('.setChanges_btn').click(() => {
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
     const homeworkData = {};
+    const scheduleData = {};
 
     days.forEach(day => {
         const dayElement = document.getElementById(day);
         const lessons = [];
+        const subjects = [];
+
         for (let i = 1; i <= 8; i++) {
             const subjectElement = dayElement.querySelector(`#${day.toLowerCase().slice(0, 3)}_subject${i}`);
             const homeworkElement = dayElement.querySelector(`#${day.toLowerCase().slice(0, 3)}_homework${i}`);
 
             if (subjectElement && homeworkElement) {
                 const homework = homeworkElement.value;
+                const subject = subjectElement.value;
+
                 lessons.push({ homework });
+                subjects.push({ subject });
             }
         }
         homeworkData[day.toLowerCase()] = {
             lessons: lessons
         };
+        scheduleData[day.toLowerCase()] = subjects;
     });
 
     saveHomework(homeworkData);
+    saveSchedule(scheduleData);
 });
+
+function saveSchedule(scheduleData) {
+    console.log('Saving Schedule:', scheduleData);
+    axios.post('/api/updateSchedule', scheduleData, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        console.log('Schedule Saved:', response.data);
+    })
+    .catch(error => {
+        console.error('Error saving schedule:', error);
+    });
+}
+
 
 // Function to save homework (no subject saving)
 function saveHomework(homeworkData) {
