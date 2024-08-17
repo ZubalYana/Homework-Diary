@@ -8,7 +8,6 @@ $(document).ready(function() {
         $('#nav_events').removeClass('active_nav');
         $('#nav_distribution').removeClass('active_nav');
     });
-
     $('#nav_events').click(() => {
         $('#events').css('display', 'flex');
         $('#distribution').hide();
@@ -17,7 +16,6 @@ $(document).ready(function() {
         $('#nav_events').addClass('active_nav');
         $('#nav_distribution').removeClass('active_nav');
     });
-
     $('#nav_distribution').click(() => {
         $('#events').hide();
         $('#distribution').css('display', 'flex');
@@ -111,7 +109,6 @@ $(document).ready(function() {
     $('.setChanges_btn').click(() => {
         const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
         const homeworkData = {};
-
         days.forEach(day => {
             const dayKey = day.toLowerCase();
             homeworkData[dayKey] = {
@@ -126,7 +123,6 @@ $(document).ready(function() {
                 }
             }
         });
-
         saveHomework(homeworkData);
     });
 
