@@ -151,6 +151,6 @@ $(document).ready(function() {
     $('.sendDistribution_btn').click(()=>{
         const distributionText = $('#distribution_textarea').val()
         console.log(distributionText)
-        axios.post('/distribution', distributionText)
+        axios.post('/distribution', {distributionText})
     })
 });

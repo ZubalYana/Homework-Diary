@@ -159,6 +159,9 @@ app.post('/api/updateSchedule', (req, res) => {
             res.status(500).json({ message: 'Failed to update schedule' });
         });
 });
+app.post('/distribution', (req,res)=>{
+    console.log(req.body)
+})
 bot.on('message', (msg) => {
     const userId = 1132590035;
     const chatId = msg.chat.id;
