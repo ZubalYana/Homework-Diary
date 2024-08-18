@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    // Page navigation
+    //page navigation
     $('#events').hide();
     $('#distribution').hide();
     $('#nav_homework').click(() => {
@@ -128,7 +128,7 @@ $(document).ready(function() {
         saveHomework(homeworkData);
     });
 
-    // Fetch and populate homework on page load
+    //fetch and populate homework on page load
     function fetchAndPopulateHomework() {
         axios.get('/api/getHomework')
             .then((res) => {
@@ -145,6 +145,12 @@ $(document).ready(function() {
                 console.error('Error fetching homework:', error);
             });
     }
-
     fetchAndPopulateHomework();
+
+    //distribution sending
+    $('.sendDistribution_btn').click(()=>{
+        const distributionText = $('#distribution_textarea').val()
+        console.log(distributionText)
+        axios.post('/distribution', distributionText)
+    })
 });
