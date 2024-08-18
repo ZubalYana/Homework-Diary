@@ -26,8 +26,11 @@ $(document).ready(function() {
         $('.nav_events').removeClass('active_nav');
         $('.nav_distribution').addClass('active_nav');
     });
-
-    // Function to populate the schedule in the UI
+    
+    $('.burger').click(()=>{
+        $('.burgerPopup_con').css('display', 'flex')
+    })
+    //function to populate the schedule in the UI
     function populateSchedule(schedule) {
         if (!schedule) return;
 
@@ -40,7 +43,7 @@ $(document).ready(function() {
         });
     }
 
-    // Fetch and populate schedule on page load
+    //fetch and populate schedule on page load
     function fetchAndPopulateSchedule() {
         axios.get('/api/getSchedule')
             .then((res) => {
@@ -51,10 +54,9 @@ $(document).ready(function() {
                 console.error('Error fetching schedule:', error);
             });
     }
-
     fetchAndPopulateSchedule();
 
-    // Save the updated schedule
+    //save the updated schedule
     function saveSchedule(scheduleData) {
         console.log('Saving Schedule:', scheduleData);
         axios.post('/api/updateSchedule', scheduleData, {
@@ -69,7 +71,6 @@ $(document).ready(function() {
             console.error('Error saving schedule:', error);
         });
     }
-
     // Handle saving and updating the schedule
     $('.setChanges_btn').click(function() {
         const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];

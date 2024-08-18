@@ -39,6 +39,7 @@
   padding: 40px;
   color: #212121;
   padding-top: 30px;
+  position: relative;
 }
 .wrap .header {
   width: 100%;
@@ -76,6 +77,32 @@
 }
 .wrap .header #adminsettings:hover {
   color: #00796b;
+}
+.wrap .burgerPopup_con {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(33, 33, 33, 0.2);
+}
+.wrap .burgerPopup_con .burgerPopup {
+  width: 80%;
+  height: 250px;
+  border-radius: 16px;
+  background-color: #fff;
+  box-shadow: 2px 2px 5px #555;
+  padding: 20px;
+}
+.wrap .burgerPopup_con .burgerPopup .active_nav {
+  font-weight: 600;
+}
+.wrap .burgerPopup_con .burgerPopup .nav_link {
+  font-size: 20px;
+  margin-bottom: 7px;
 }
 .wrap .homework {
   flex-direction: column;
