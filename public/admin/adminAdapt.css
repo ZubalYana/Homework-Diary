@@ -35,6 +35,16 @@
   .wrap .homework .afterButtonSpace {
     height: 40px;
   }
+  .wrap .distribution #distribution_textarea {
+    height: 300px;
+    font-size: 16px;
+    outline: #009688;
+  }
+  .wrap .distribution .sendDistribution_btn {
+    font-size: 24px;
+    width: 180px;
+    height: 60px;
+  }
 }
 @media screen and (max-device-width: 375px) {
   .wrap .header {
@@ -75,5 +85,15 @@
   }
   .wrap .homework .afterButtonSpace {
     height: 40px;
+  }
+  .wrap .distribution #distribution_textarea {
+    height: 300px;
+    font-size: 16px;
+    outline: #009688;
+  }
+  .wrap .distribution .sendDistribution_btn {
+    font-size: 24px;
+    width: 180px;
+    height: 60px;
   }
 }/*# sourceMappingURL=adminAdapt.css.map */
