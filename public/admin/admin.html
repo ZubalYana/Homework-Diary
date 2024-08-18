@@ -16,9 +16,9 @@
         <div class="header">
             <div class="logo">Адмін</div>
             <div class="nav">
-                <div class="nav_link active_nav" id="nav_homework">Домашнє</div>
-                <div class="nav_link" id="nav_events">Події</div>
-                <div class="nav_link" id="nav_distribution">Розсилка</div>
+                <div class="nav_link active_nav nav_homework">Домашнє</div>
+                <div class="nav_link nav_events">Події</div>
+                <div class="nav_link nav_distribution" >Розсилка</div>
             </div>
             <i class="fa-solid fa-gear" id="adminsettings"></i>
             <div class="burger">
@@ -26,6 +26,11 @@
                 <div class="row"></div>
                 <div class="row"></div>
             </div>
+        </div>
+        <div class="burgerPopup" style="display: none;">
+            <div class="nav_link active_nav nav_homework">Домашнє</div>
+            <div class="nav_link nav_events">Події</div>
+            <div class="nav_link nav_distribution" >Розсилка</div>
         </div>
         <div class="homework" id="homework">
             <div class="daysContainer">
@@ -238,7 +243,6 @@
             <textarea id="distribution_textarea" placeholder="Повідомлення розсилки"></textarea>
             <div class="sendDistribution_btn">Send</div>
         </div>
-
     </div>
     
 

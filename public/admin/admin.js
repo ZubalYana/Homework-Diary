@@ -2,29 +2,29 @@ $(document).ready(function() {
     //page navigation
     $('#events').hide();
     $('#distribution').hide();
-    $('#nav_homework').click(() => {
+    $('.nav_homework').click(() => {
         $('#events').hide();
         $('#distribution').hide();
         $('#homework').css('display', 'flex');
-        $('#nav_homework').addClass('active_nav');
-        $('#nav_events').removeClass('active_nav');
-        $('#nav_distribution').removeClass('active_nav');
+        $('.nav_homework').addClass('active_nav');
+        $('.nav_events').removeClass('active_nav');
+        $('.nav_distribution').removeClass('active_nav');
     });
-    $('#nav_events').click(() => {
+    $('.nav_events').click(() => {
         $('#events').css('display', 'flex');
         $('#distribution').hide();
         $('#homework').hide();
-        $('#nav_homework').removeClass('active_nav');
-        $('#nav_events').addClass('active_nav');
-        $('#nav_distribution').removeClass('active_nav');
+        $('.nav_homework').removeClass('active_nav');
+        $('.nav_events').addClass('active_nav');
+        $('.nav_distribution').removeClass('active_nav');
     });
-    $('#nav_distribution').click(() => {
+    $('.nav_distribution').click(() => {
         $('#events').hide();
         $('#distribution').css('display', 'flex');
         $('#homework').hide();
-        $('#nav_homework').removeClass('active_nav');
-        $('#nav_events').removeClass('active_nav');
-        $('#nav_distribution').addClass('active_nav');
+        $('.nav_homework').removeClass('active_nav');
+        $('.nav_events').removeClass('active_nav');
+        $('.nav_distribution').addClass('active_nav');
     });
 
     // Function to populate the schedule in the UI
