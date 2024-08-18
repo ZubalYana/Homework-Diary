@@ -1,5 +1,7 @@
 $(document).ready(function() {
     // Page navigation
+    $('#events').hide();
+    $('#distribution').hide();
     $('#nav_homework').click(() => {
         $('#events').hide();
         $('#distribution').hide();
