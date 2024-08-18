@@ -26,9 +26,11 @@ $(document).ready(function() {
         $('.nav_events').removeClass('active_nav');
         $('.nav_distribution').addClass('active_nav');
     });
-    
     $('.burger').click(()=>{
         $('.burgerPopup_con').css('display', 'flex')
+    })
+    $('#burgerXmark').click(()=>{
+        $('.burgerPopup_con').css('display', 'none')
     })
     //function to populate the schedule in the UI
     function populateSchedule(schedule) {

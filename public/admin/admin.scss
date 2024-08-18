@@ -86,12 +86,21 @@
         background-color: #fff;
         box-shadow: 2px 2px 5px #555;
         padding: 20px;
+        position: relative;
         .active_nav {
           font-weight: 600;
         }
         .nav_link{
-          font-size: 20px;
-          margin-bottom: 7px;
+          font-size: 22px;
+          margin-bottom: 8px;
+        }
+        #burgerXmark{
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          font-size: 24px;
+          color: #212121;
+          cursor: pointer;
         }
       }
     }
