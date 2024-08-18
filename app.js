@@ -160,7 +160,11 @@ app.post('/api/updateSchedule', (req, res) => {
         });
 });
 app.post('/distribution', (req,res)=>{
-    console.log(req.body)
+    const distribution = req.body.distributionText;
+    users.forEach(userId => {
+        bot.sendMessage(userId, distribution);
+    });
+    res.sendStatus(200);
 })
 bot.on('message', (msg) => {
     const userId = 1132590035;
