@@ -158,5 +158,6 @@ $(document).ready(function() {
         const distributionText = $('#distribution_textarea').val()
         console.log(distributionText)
         axios.post('/distribution', {distributionText})
+        $('#distribution_textarea').val('')
     })
 });
