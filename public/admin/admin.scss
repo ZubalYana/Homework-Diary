@@ -104,7 +104,6 @@
         }
       }
     }
-
     .homework{
       flex-direction: column;
       .daysContainer {
@@ -198,6 +197,25 @@
           background-color: #212121;
           color: #fff;
       }
+    }
+    .events{
+      flex-direction: column;
+      #eventDate {
+        font-size: 16px; 
+        padding: 10px;
+        border: 2px solid #007BFF;
+        border-radius: 5px; 
+        outline: none; 
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+        width: 100%;
+        max-width: 300px; 
+        transition: border-color 0.3s, box-shadow 0.3s; 
+    }
+    
+    #eventDate:focus {
+        border-color: #0056b3;
+        box-shadow: 0 0 5px rgba(0, 91, 255, 0.5);
+    }
     }
     .distribution{
       width: 100%;
