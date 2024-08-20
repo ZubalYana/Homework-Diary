@@ -200,22 +200,36 @@
     }
     .events{
       flex-direction: column;
-      #eventDate {
-        font-size: 16px; 
-        padding: 10px;
-        border: 2px solid #007BFF;
-        border-radius: 5px; 
-        outline: none; 
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-        width: 100%;
-        max-width: 300px; 
-        transition: border-color 0.3s, box-shadow 0.3s; 
-    }
-    
-    #eventDate:focus {
-        border-color: #0056b3;
-        box-shadow: 0 0 5px rgba(0, 91, 255, 0.5);
-    }
+      padding-top: 25px;
+      .eventNameAndDetails{
+        width: 620px;
+        display: flex;
+        justify-content: space-between;
+        #eventName{
+          width: 300px;
+          height: 40px;
+          border-radius: 10px; 
+          padding: 15px;
+        }
+        #eventDate {
+          height: 40px;
+          font-size: 16px; 
+          padding: 10px;
+          border: 2px solid #212121;
+          border-radius: 10px; 
+          outline: none; 
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+          width: 100%;
+          max-width: 300px; 
+          transition: border-color 0.3s, box-shadow 0.3s; 
+      }
+      
+      #eventDate:focus {
+          border-color: #555;
+          box-shadow: 0 0 5px #888;
+      }
+      }
+
     }
     .distribution{
       width: 100%;
