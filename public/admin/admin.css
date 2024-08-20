@@ -180,11 +180,11 @@
   color: #b2dfdb;
 }
 .wrap .homework .setChanges_btn {
-  width: 280px;
+  width: 320px;
   height: 70px;
   background-color: #009688;
   color: #fff;
-  font-size: 36px;
+  font-size: 28px;
   font-weight: 600;
   display: flex;
   justify-content: center;
@@ -251,11 +251,11 @@
   margin-top: 20px;
 }
 .wrap .events .eventBtn {
-  width: 250px;
+  width: 280px;
   height: 70px;
   background-color: #009688;
   color: #fff;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 600;
   display: flex;
   justify-content: center;
@@ -298,7 +298,7 @@
   height: 70px;
   background-color: #009688;
   color: #fff;
-  font-size: 36px;
+  font-size: 28px;
   font-weight: 600;
   display: flex;
   justify-content: center;
