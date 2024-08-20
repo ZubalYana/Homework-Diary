@@ -216,15 +216,18 @@
 }
 .wrap .events .eventNameAndDetails #eventName {
   width: 300px;
-  height: 40px;
+  height: 45px;
   border-radius: 10px;
   padding: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  border: 1px #212121 solid;
 }
 .wrap .events .eventNameAndDetails #eventDate {
-  height: 40px;
+  height: 45px;
   font-size: 16px;
   padding: 10px;
-  border: 2px solid #212121;
+  border: 1px #212121 solid;
   border-radius: 10px;
   outline: none;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -235,6 +238,43 @@
 .wrap .events .eventNameAndDetails #eventDate:focus {
   border-color: #555;
   box-shadow: 0 0 5px #888;
+}
+.wrap .events #evenDetails {
+  width: 620px;
+  height: 200px;
+  border-radius: 10px;
+  padding: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  border: 1px #212121 solid;
+  resize: none;
+  margin-top: 20px;
+}
+.wrap .events .eventBtn {
+  width: 250px;
+  height: 70px;
+  background-color: #009688;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  transition: 0.4s ease-in-out;
+  cursor: pointer;
+  margin-top: 30px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.wrap .events .eventBtn:hover {
+  background-color: #B2DFDB;
+  color: #212121;
+}
+.wrap .events .eventBtn:active {
+  background-color: #212121;
+  color: #fff;
 }
 .wrap .distribution {
   width: 100%;
