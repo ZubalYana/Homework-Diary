@@ -166,6 +166,9 @@ app.post('/distribution', (req,res)=>{
     });
     res.sendStatus(200);
 })
+app.post('/events', (res,res)=>{
+    console.log(req.body)
+})
 bot.on('message', (msg) => {
     const userId = 1132590035;
     const chatId = msg.chat.id;
