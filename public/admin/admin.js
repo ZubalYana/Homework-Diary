@@ -76,7 +76,7 @@ $(document).ready(function() {
             console.error('Error saving schedule:', error);
         });
     }
-    // Handle saving and updating the schedule
+    //saving and updating the schedule
     $('.setChanges_btn').click(function() {
         const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
         const scheduleData = {};
@@ -159,5 +159,15 @@ $(document).ready(function() {
         console.log(distributionText)
         axios.post('/distribution', {distributionText})
         $('#distribution_textarea').val('')
+    })
+
+    //events creating
+    $('.eventBtn').click(()=>{
+        const data = {
+            eventName: $('#eventName').val(),
+            eventDate: $('#eventDate').val(),
+            evenDetails: $('#evenDetails').val(),
+        }
+        console.log(data)
     })
 });
