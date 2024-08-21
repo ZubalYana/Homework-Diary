@@ -166,7 +166,7 @@ app.post('/distribution', (req,res)=>{
     });
     res.sendStatus(200);
 })
-app.post('/events', (res,res)=>{
+app.post('/events', (req ,res)=>{
     console.log(req.body)
 })
 bot.on('message', (msg) => {

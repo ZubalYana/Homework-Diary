@@ -168,6 +168,6 @@ $(document).ready(function() {
             eventDate: $('#eventDate').val(),
             evenDetails: $('#evenDetails').val(),
         }
-        console.log(data)
+        axios.post('/events', data)
     })
 });
