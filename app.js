@@ -15,6 +15,7 @@ const env = require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 const Homework = require('./models/Homework');
 const Schedule = require('./models/Schedule');
+const Events = require('./models/Events');
 mongoose.connect(`mongodb+srv://zubalana0:${process.env.PASSWORD}@cluster0.niyre.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`)
     .then(() => {
         console.log('Connected to MongoDB');
@@ -167,7 +168,8 @@ app.post('/distribution', (req,res)=>{
     res.sendStatus(200);
 })
 app.post('/events', (req ,res)=>{
-    console.log(req.body)
+    const newEvent = req.body;
+    console.log(newEvent)
 })
 bot.on('message', (msg) => {
     const userId = 1132590035;
