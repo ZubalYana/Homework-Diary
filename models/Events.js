@@ -6,5 +6,5 @@ const EventSchema = new mongoose.Schema({
     details: { type: String }
 });
 
-const Schedule = mongoose.model('Schedule', ScheduleSchema);
-module.exports = Schedule;
+const Events = mongoose.model('Events', EventSchema);
+module.exports = Events;
