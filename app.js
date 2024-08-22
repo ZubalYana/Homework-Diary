@@ -167,9 +167,20 @@ app.post('/distribution', (req,res)=>{
     });
     res.sendStatus(200);
 })
-app.post('/events', (req ,res)=>{
-    const newEvent = req.body;
-    console.log(newEvent)
+app.post('/events', async (req ,res)=>{
+    try{
+        const newEvent = new Events({
+            name: req.body.eventName,
+            date: req.body.eventDate,
+            details: req.body.eventDetails
+        });
+        const savedEvent = await newEvent.save()
+        res.status(201).json(savedEvent);
+    }catch(err){
+        console.error('Error saving event:', err);
+        res.status(500).json({ err: 'Failed to save event' });
+    }
+
 })
 bot.on('message', (msg) => {
     const userId = 1132590035;

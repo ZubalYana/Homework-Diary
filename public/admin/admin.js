@@ -76,6 +76,7 @@ $(document).ready(function() {
             console.error('Error saving schedule:', error);
         });
     }
+    
     //saving and updating the schedule
     $('.setChanges_btn').click(function() {
         const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
