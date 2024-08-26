@@ -96,4 +96,21 @@
     width: 180px;
     height: 60px;
   }
+  .wrap .events .eventNameAndDetails {
+    flex-direction: column;
+    width: 100%;
+  }
+  .wrap .events .eventNameAndDetails #eventName {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  .wrap .events #evenDetails {
+    width: 100%;
+    height: 220px;
+  }
+  .wrap .events .eventBtn {
+    width: 220px;
+    height: 60px;
+    font-size: 22px;
+  }
 }/*# sourceMappingURL=adminAdapt.css.map */

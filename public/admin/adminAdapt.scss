@@ -107,5 +107,25 @@
                 height: 60px;
             }
         }
+        .events{
+            .eventNameAndDetails{
+                flex-direction: column;
+                width: 100%;
+                #eventName{
+                    margin-bottom: 20px;
+                    width: 100%;
+                }
+
+            }
+            #evenDetails{
+                width: 100%;
+                height: 220px;
+            }
+            .eventBtn{
+                width: 220px;
+                height: 60px;
+                font-size: 22px;
+            }
+        }
     } 
 }
