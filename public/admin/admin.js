@@ -163,12 +163,23 @@ $(document).ready(function() {
     })
 
     //events creating
-    $('.eventBtn').click(()=>{
+    $('.eventBtn').click(() => {
         const data = {
             eventName: $('#eventName').val(),
             eventDate: $('#eventDate').val(),
-            evenDetails: $('#evenDetails').val(),
-        }
+            eventDetails: $('#evenDetails').val(),
+        };
+        console.log('Event data:', data); 
         axios.post('/events', data)
-    })
+            .then(response => {
+                console.log('Event saved:', response.data);
+                $('#eventName').val('')
+                $('#eventDate').val('')
+                $('#evenDetails').val('')
+            })
+            .catch(error => {
+                console.error('Error saving event:', error);
+            });
+    });
+    
 });
