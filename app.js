@@ -94,9 +94,9 @@ bot.on('message', async (msg) => {
             if (events.length > 0) {
                 let eventsMessage = '<b>Найближчі події:</b>\n\n';
                 events.forEach(event => {
-                    eventsMessage += `<b>${event.date}, ${event.dayOfWeek}:</b> ${event.title}\n`;
+                    eventsMessage += `<b>${event.date}:</b> ${event.name}\n`;
                     if (event.details) {
-                        eventsMessage += `  Деталі: ${event.details}\n`;
+                        eventsMessage += `Деталі: ${event.details}\n`;
                     }
                     eventsMessage += '\n';
                 });
