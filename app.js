@@ -88,8 +88,26 @@ bot.on('message', async (msg) => {
             console.error('Error retrieving homework or schedule:', error);
             bot.sendMessage(chatId, 'Сталася помилка при отриманні домашнього завдання або розкладу.', { parse_mode: 'HTML' });
         }
-    } else if (msg.text === 'Події') {
-        bot.sendMessage(chatId, 'Найблищі події: \n<b>1 вересня, неділя:</b> початок навчального року. \nДетальніша інформація з\'явиться блище до кінця серпня.', { parse_mode: 'HTML' });
+    }else if (msg.text === 'Події') {
+        try {
+            const events = await Events.find().lean(); 
+            if (events.length > 0) {
+                let eventsMessage = '<b>Найближчі події:</b>\n\n';
+                events.forEach(event => {
+                    eventsMessage += `<b>${event.date}, ${event.dayOfWeek}:</b> ${event.title}\n`;
+                    if (event.details) {
+                        eventsMessage += `  Деталі: ${event.details}\n`;
+                    }
+                    eventsMessage += '\n';
+                });
+                bot.sendMessage(chatId, eventsMessage, { parse_mode: 'HTML' });
+            } else {
+                bot.sendMessage(chatId, 'Немає запланованих подій.', { parse_mode: 'HTML' });
+            }
+        } catch (error) {
+            console.error('Error retrieving events:', error);
+            bot.sendMessage(chatId, 'Сталася помилка при отриманні подій.', { parse_mode: 'HTML' });
+        }
     } 
     const options = {
         reply_markup: {
