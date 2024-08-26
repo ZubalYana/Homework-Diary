@@ -90,11 +90,17 @@ bot.on('message', async (msg) => {
         }
     }else if (msg.text === 'Події') {
         try {
-            const events = await Events.find().lean(); 
+            const events = await Events.find().lean();
             if (events.length > 0) {
                 let eventsMessage = '<b>Найближчі події:</b>\n\n';
                 events.forEach(event => {
-                    eventsMessage += `<b>${event.date}:</b> ${event.name}\n`;
+                    const formattedDate = new Date(event.date).toLocaleDateString('uk-UA', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+                    eventsMessage += `${formattedDate}: <b>${event.name}</b>\n`;
                     if (event.details) {
                         eventsMessage += `Деталі: ${event.details}\n`;
                     }
@@ -108,7 +114,7 @@ bot.on('message', async (msg) => {
             console.error('Error retrieving events:', error);
             bot.sendMessage(chatId, 'Сталася помилка при отриманні подій.', { parse_mode: 'HTML' });
         }
-    } 
+    }
     const options = {
         reply_markup: {
             keyboard: [
