@@ -89,31 +89,36 @@ bot.on('message', async (msg) => {
             bot.sendMessage(chatId, 'Сталася помилка при отриманні домашнього завдання або розкладу.', { parse_mode: 'HTML' });
         }
     }else if (msg.text === 'Події') {
-        try {
-            const events = await Events.find().lean();
-            if (events.length > 0) {
-                let eventsMessage = '<b>Найближчі події:</b>\n\n';
-                events.forEach(event => {
-                    const formattedDate = new Date(event.date).toLocaleDateString('uk-UA', {
-                        weekday: 'long',
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
-                    });
-                    eventsMessage += `${formattedDate}: <b>${event.name}</b>\n`;
-                    if (event.details) {
-                        eventsMessage += `Деталі: ${event.details}\n`;
-                    }
-                    eventsMessage += '\n';
-                });
-                bot.sendMessage(chatId, eventsMessage, { parse_mode: 'HTML' });
-            } else {
-                bot.sendMessage(chatId, 'Немає запланованих подій.', { parse_mode: 'HTML' });
-            }
-        } catch (error) {
-            console.error('Error retrieving events:', error);
-            bot.sendMessage(chatId, 'Сталася помилка при отриманні подій.', { parse_mode: 'HTML' });
+        try{
+            bot.sendMessage(chatId, 'Найближчі події: \n\n2 вересня, понеділок: <b>початок навчального року</b> \nДеталі події з\'являться після їх оголошення', { parse_mode: 'HTML' });
+        }catch(err){
+            console.log(err)
         }
+        // try {
+        //     const events = await Events.find().lean();
+        //     if (events.length > 0) {
+        //         let eventsMessage = '<b>Найближчі події:</b>\n\n';
+        //         events.forEach(event => {
+        //             const formattedDate = new Date(event.date).toLocaleDateString('uk-UA', {
+        //                 weekday: 'long',
+        //                 year: 'numeric',
+        //                 month: 'long',
+        //                 day: 'numeric'
+        //             });
+        //             eventsMessage += `${formattedDate}: <b>${event.name}</b>\n`;
+        //             if (event.details) {
+        //                 eventsMessage += `Деталі: ${event.details}\n`;
+        //             }
+        //             eventsMessage += '\n';
+        //         });
+        //         bot.sendMessage(chatId, eventsMessage, { parse_mode: 'HTML' });
+        //     } else {
+        //         bot.sendMessage(chatId, 'Немає запланованих подій.', { parse_mode: 'HTML' });
+        //     }
+        // } catch (error) {
+        //     console.error('Error retrieving events:', error);
+        //     bot.sendMessage(chatId, 'Сталася помилка при отриманні подій.', { parse_mode: 'HTML' });
+        // }
     }
     const options = {
         reply_markup: {
