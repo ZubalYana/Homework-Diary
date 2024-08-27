@@ -100,9 +100,9 @@ bot.on('message', async (msg) => {
                         month: 'long',
                         day: 'numeric'
                     });
-                    eventsMessage += `${formattedDate}: <b>${event.eventName}</b>\n`;
-                    if (event.eventDetails) {
-                        eventsMessage += `Деталі: ${event.eventDetails}\n`;
+                    eventsMessage += `${formattedDate}: <b>${event.name}</b>\n`;
+                    if (event.details) {
+                        eventsMessage += `Деталі: ${event.details}\n`;
                     }
                     eventsMessage += '\n';
                 });
