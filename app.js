@@ -120,6 +120,14 @@ bot.on('message', async (msg) => {
         //     console.error('Error retrieving events:', error);
         //     bot.sendMessage(chatId, 'Сталася помилка при отриманні подій.', { parse_mode: 'HTML' });
         // }
+    }else if (msg.text === 'Струкрура навчання') {
+        try{
+            bot.sendMessage(chatId, 
+                'Структура навчального року 2024-2025: \n\n<b>Навчання:</b> 02.09.2024-06.06.2025 \n<b>Канікули:</b> \n •осінні: 28.10-03.11 ( 1 тиждень ) \n •зимові: 20.12.2024-12.01.2025 ( 3 тижні ) \n •весняні: 26.03-30.03 ( 4 дні ) \n •великодні: 18.04-21.04 ( 3 дні ) \n •літні: 09.06-31.08 ( майже 3 місяці, 2 місяці і 21 день )', { parse_mode: 'HTML' }
+            )
+        }catch(err){ 
+            console.log(err)
+        }
     }
 });
 app.post('/send', (req, res) => {
