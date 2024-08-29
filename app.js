@@ -120,15 +120,6 @@ bot.on('message', async (msg) => {
         //     bot.sendMessage(chatId, 'Сталася помилка при отриманні подій.', { parse_mode: 'HTML' });
         // }
     }
-    const options = {
-        reply_markup: {
-            keyboard: [
-                [{ text: 'Button 1' }, { text: 'Button 2' }],
-                [{ text: 'Button 3' }]
-            ],
-            resize_keyboard: true
-        }
-    };
 });
 app.post('/send', (req, res) => {
     console.log(req.body.message);
