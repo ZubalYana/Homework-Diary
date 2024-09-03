@@ -46,8 +46,16 @@ bot.onText(/\/start/, (msg) => {
     };
     bot.sendMessage(chatId, '\n Привіт! Бот активовано. \nОтримуйте всю інформацію про домашнє завдання, дедлайни та події! \nВажливо: при перенавантаженні серверу, можлива затримка повідомлення до кількох хвилин. \nУ разі виникнення будь-яких проблем у використанні чи недостачі інформаціЇ, повідомляйте: @yanavesq.', options);
 });
-bot.on('message', async (msg) => {
+const blockedUsers = [1325245467]; // Add the chat ID to the blocklist
+
+bot.on('message', (msg) => {
     const chatId = msg.chat.id;
+
+    if (blockedUsers.includes(chatId)) {
+        // If chat ID is blocked, ignore the message
+        console.log(`Blocked user ${chatId} tried to interact.`);
+        return;
+    }
     if (msg.text === 'Домашнє завдання') {
         try {
             const homework = await Homework.findOne().lean();
@@ -125,6 +133,14 @@ bot.on('message', async (msg) => {
         try{
             bot.sendMessage(chatId, 
                 'Структура навчального року 2024-2025: \n\n<b>Навчання:</b> 02.09.2024-06.06.2025 \n<b>Канікули:</b> \n •осінні: 28.10-03.11 ( 1 тиждень ) \n •зимові: 20.12.2024-12.01.2025 ( 3 тижні ) \n •весняні: 26.03-30.03 ( 4 дні ) \n •великодні: 18.04-21.04 ( 3 дні ) \n •літні: 09.06-31.08 ( майже 3 місяці, 2 місяці і 21 день )', { parse_mode: 'HTML' }
+            )
+        }catch(err){ 
+            console.log(err)
+        }
+    }else if (msg.text === 'Розклад дзвінків') {
+        try{
+            bot.sendMessage(chatId, 
+                'Розклад дзвінків: \n 1 урок: <b>8.30-9.15</b> \n 2 урок: <b>9.20-10.05</b> \n 3 урок: <b>10.15-11.00</b> \n 4 урок: <b>11.15-12.00</b> \n 5 урок: <b>12.1-9.15</b> \n 1 урок: <b>8.30-9.15</b> \n 1 урок: <b>8.30-9.15</b> \n 1 урок: <b>8.30-9.15</b> \n 1 урок: <b>8.30-9.15</b> \n', { parse_mode: 'HTML' }
             )
         }catch(err){ 
             console.log(err)
