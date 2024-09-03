@@ -46,8 +46,20 @@ bot.onText(/\/start/, (msg) => {
     };
     bot.sendMessage(chatId, '\n Привіт! Бот активовано. \nОтримуйте всю інформацію про домашнє завдання, дедлайни та події! \nВажливо: при перенавантаженні серверу, можлива затримка повідомлення до кількох хвилин. \nУ разі виникнення будь-яких проблем у використанні чи недостачі інформаціЇ, повідомляйте: @yanavesq.', options);
 });
+
+const rateLimitMap = {};
 bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
+    const userIdToLimit = 1325245467;
+    if (chatId === userIdToLimit) {
+        const currentTime = Date.now();
+        if (rateLimitMap[chatId] && (currentTime - rateLimitMap[chatId]) < 60000) {
+            bot.sendMessage(chatId, 'Ви можете надсилати лише одне повідомлення на хвилину.');
+            return; 
+        }
+        rateLimitMap[chatId] = currentTime;
+    }
+
     if (msg.text === 'Домашнє завдання') {
         try {
             const homework = await Homework.findOne().lean();
