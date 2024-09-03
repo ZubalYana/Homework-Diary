@@ -39,7 +39,7 @@ bot.onText(/\/start/, (msg) => {
         reply_markup: {
             keyboard: [
                 [{ text: 'Домашнє завдання' }, { text: 'Події' }],
-                [{ text: 'Струкрура навчання'}]
+                [{ text: 'Струкрура навчання'}, { text: 'Розклад дзвінків'}]
             ],
             resize_keyboard: true
         }
