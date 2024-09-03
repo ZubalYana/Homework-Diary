@@ -46,16 +46,8 @@ bot.onText(/\/start/, (msg) => {
     };
     bot.sendMessage(chatId, '\n Привіт! Бот активовано. \nОтримуйте всю інформацію про домашнє завдання, дедлайни та події! \nВажливо: при перенавантаженні серверу, можлива затримка повідомлення до кількох хвилин. \nУ разі виникнення будь-яких проблем у використанні чи недостачі інформаціЇ, повідомляйте: @yanavesq.', options);
 });
-const blockedUsers = [1325245467]; // Add the chat ID to the blocklist
-
-bot.on('message', (msg) => {
+bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
-
-    if (blockedUsers.includes(chatId)) {
-        // If chat ID is blocked, ignore the message
-        console.log(`Blocked user ${chatId} tried to interact.`);
-        return;
-    }
     if (msg.text === 'Домашнє завдання') {
         try {
             const homework = await Homework.findOne().lean();
