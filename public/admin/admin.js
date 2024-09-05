@@ -183,3 +183,6 @@ $(document).ready(function() {
     });
     
 });
+
+//theme changing
+let theme = localStorage.getItem('theme') || 'light';
