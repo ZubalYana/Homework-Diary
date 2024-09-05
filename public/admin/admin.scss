@@ -326,12 +326,21 @@
   top: 0;
   left: 0;
   .sesttingPopup{
-    width: 200px;
-    height: 120px;
+    width: 400px;
+    height: 220px;
     background-color: #fff;
     padding: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 20px;
+    position: relative;
+    #settingsXmark{
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 24px;
+      cursor: pointer;
+    }
   }
 }
