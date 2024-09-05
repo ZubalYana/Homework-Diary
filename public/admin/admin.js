@@ -186,3 +186,9 @@ $(document).ready(function() {
 
 //theme changing
 let theme = localStorage.getItem('theme') || 'light';
+$('#adminsettings').click(()=>{
+    $('.settingsCon').css('display', 'flex')
+})
+$('#settingsXmark').click(()=>{
+    $('.settingsCon').css('display', 'none')
+})
