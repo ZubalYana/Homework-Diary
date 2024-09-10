@@ -48,6 +48,27 @@ bot.onText(/\/start/, (msg) => {
 });
 
 const rateLimitMap = {};
+function updateCountdown() {
+    let now = new Date();
+    let today = now.getDay(); 
+    let nextSaturday = new Date(now);
+    if (today !== 6) {
+        nextSaturday.setDate(now.getDate() + (6 - today));
+    }
+    nextSaturday.setHours(0, 0, 0, 0);
+    let nextMonday = new Date(nextSaturday);
+    nextMonday.setDate(nextSaturday.getDate() + 2);
+    let targetTime = today === 6 && now < nextMonday ? nextMonday : nextSaturday;
+    let timeDiff = targetTime - now;
+    let days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+    console.log(`${days} days ${hours} hours ${minutes} minutes ${seconds} seconds`);
+    setTimeout(updateCountdown, 1000);
+}
+updateCountdown();
+
 bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
     const userIdToLimit = 1325245467;
