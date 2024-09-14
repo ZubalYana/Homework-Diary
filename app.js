@@ -178,7 +178,8 @@ bot.on('message', async (msg) => {
                 let minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
                 let seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
             
-                return `Залишилося: ${days} днів ${hours} годин ${minutes} хвилин ${seconds} секунд до ${today === 6 || today === 0 ? 'понеділка' : 'вихідних'}!`;
+                bot.sendMessage(chatId, `Залишилося: ${days} днів ${hours} годин ${minutes} хвилин ${seconds} секунд до ${today === 6 || today === 0 ? 'понеділка 💔' : 'вихідних! 🎉'}`, { parse_mode: 'HTML' });
+
             }
             bot.sendMessage(chatId, getCountdownMessage(), { parse_mode: 'HTML' });
 
