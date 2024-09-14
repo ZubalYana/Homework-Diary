@@ -155,20 +155,30 @@ bot.on('message', async (msg) => {
             function getCountdownMessage() {
                 let now = new Date();
                 let today = now.getDay();
+                
                 let nextSaturday = new Date(now);
-                if (today !== 6) {
+                if (today !== 6) { 
                     nextSaturday.setDate(now.getDate() + (6 - today));
                 }
                 nextSaturday.setHours(0, 0, 0, 0);
+            
                 let nextMonday = new Date(nextSaturday);
                 nextMonday.setDate(nextSaturday.getDate() + 2);
-                let targetTime = today === 6 && now < nextMonday ? nextMonday : nextSaturday;
+                
+                let targetTime;
+                if (today === 6 || today === 0) { 
+                    targetTime = nextMonday; 
+                } else {
+                    targetTime = nextSaturday; 
+                }
+                
                 let timeDiff = targetTime - now;
                 let days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
                 let hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 let minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
                 let seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-                return `Залишилося: ${days} днів ${hours} годин ${minutes} хвилин ${seconds} секунд до вихідних!`;
+            
+                return `Залишилося: ${days} днів ${hours} годин ${minutes} хвилин ${seconds} секунд до ${today === 6 || today === 0 ? 'понеділка' : 'вихідних'}!`;
             }
             bot.sendMessage(chatId, getCountdownMessage(), { parse_mode: 'HTML' });
 
