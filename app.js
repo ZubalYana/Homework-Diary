@@ -104,8 +104,7 @@ bot.on('message', async (msg) => {
         }
     }else if (msg.text === 'Події') {
         try{
-            // bot.sendMessage(chatId, 'Найближчі події: \n\n2 вересня, понеділок: <b>початок навчального року</b> \nЛінійка відбудеться о 9:30, форма одягу - вишиванка.', { parse_mode: 'HTML' });
-            bot.sendMessage(chatId, 'Немає активних подій на найближчий час', { parse_mode: 'HTML' });
+            bot.sendMessage(chatId, 'Найближчі події: \n\n3 жовтня, четвер: <b>Ярмарка та козацькі забави</b> \n3 жовтня, п’ятниця: <b>День вчителя</b>', { parse_mode: 'HTML' });
         }catch(err){
             console.log(err)
         }
