@@ -104,7 +104,7 @@ bot.on('message', async (msg) => {
         }
     }else if (msg.text === 'Події') {
         try{
-            bot.sendMessage(chatId, 'Немає подій на найближчий час', { parse_mode: 'HTML' });
+            bot.sendMessage(chatId, 'Немає подій на найближчий час.', { parse_mode: 'HTML' });
         }catch(err){
             console.log(err)
         }
