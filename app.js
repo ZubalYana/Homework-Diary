@@ -15,7 +15,7 @@ const env = require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 const Homework = require('./models/Homework');
 const Schedule = require('./models/Schedule');
-const Events = require('./models/Events');
+const EventsArray = []
 mongoose.connect(`mongodb+srv://zubalana0:${process.env.PASSWORD}@cluster0.niyre.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`)
     .then(() => {
         console.log('Connected to MongoDB');
@@ -256,13 +256,15 @@ app.post('/distribution', (req,res)=>{
 })
 app.post('/events', async (req ,res)=>{
     try{
-        const newEvent = new Events({
-            name: req.body.eventName,
-            date: req.body.eventDate,
-            details: req.body.eventDetails
-        });
-        const savedEvent = await newEvent.save()
-        res.status(201).json(savedEvent);
+        console.log(req.body);
+        EventsArray.push(
+            {
+                eventName: req.body.eventName,
+                eventDate: req.body.eventDate,
+                eventDetails: req.body.eventDetails
+            }
+        )
+        console.log(EventsArray)
     }catch(err){
         console.error('Error saving event:', err);
         res.status(500).json({ err: 'Failed to save event' });
