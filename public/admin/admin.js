@@ -229,6 +229,19 @@ $(document).ready(function() {
             });
     });
 
+    //notes deleting
+    function deleteNote(noteId, noteDiv) {
+        axios.delete(`/api/deleteNotes/${noteId}`)
+            .then(response => {
+                console.log('Note deleted:', response.data);
+                noteDiv.remove();
+            })
+            .catch(error => {
+                console.error('Error deleting note:', error);
+                alert('Failed to delete the note. Please try again.');
+            });
+    }
+    
     //displaying notes
     function fetchAndDisplayNotes() {
         axios.get('/api/getNotes')
@@ -236,6 +249,7 @@ $(document).ready(function() {
                 const notes = res.data;
                 const notesContainer = $('.notesContainer');
                 notesContainer.empty();
+    
                 notes.forEach(note => {
                     const imagesContainer = $('<div class="notesImgsContainer"></div>');
     
@@ -243,6 +257,7 @@ $(document).ready(function() {
                         const fileImg = $(`<img class="noteImg" src="${file}" alt="${note.name}">`);
                         imagesContainer.append(fileImg);
                     });
+    
                     const formattedDate = new Intl.DateTimeFormat('uk-UA', { 
                         day: 'numeric', 
                         month: 'long', 
@@ -254,18 +269,24 @@ $(document).ready(function() {
                             <h3 class="noteName">${note.name}</h3>
                             <p class="noteDescription">${note.description}</p>
                             <p class="noteDate">Дата створення: <span class="noteDateNum">${formattedDate}</span></p>
+                            <button class="deleteNoteBtn"><i class="fa-solid fa-trash-can"></i>Видалити</button>
                         </div>
                     `);
                     noteDiv.prepend(imagesContainer);
                     notesContainer.append(noteDiv);
+    
+                    const deleteNoteBtn = noteDiv.find('.deleteNoteBtn');
+                    deleteNoteBtn.on('click', () => {
+                        deleteNote(note._id, noteDiv);
+                    });
                 });
             })
             .catch((error) => {
                 console.error('Error fetching notes:', error);
             });
     }
+    fetchAndDisplayNotes()
     
-    fetchAndDisplayNotes();
     
      
 });

@@ -17,6 +17,7 @@
 
 ::-webkit-scrollbar {
   height: 12px;
+  width: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -368,6 +369,28 @@
 }
 .wrap .notes .notesContainer .note .noteDateNum {
   font-weight: 600;
+}
+.wrap .notes .notesContainer .note .deleteNoteBtn {
+  width: 150px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  color: #212121;
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  margin-top: 15px;
+  transition: all 0.5s ease;
+}
+.wrap .notes .notesContainer .note .deleteNoteBtn i {
+  margin-right: 7px;
+}
+.wrap .notes .notesContainer .note .deleteNoteBtn:hover {
+  background-color: #212121;
+  color: #f1f1f1;
 }
 
 .settingsCon {

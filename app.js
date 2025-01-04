@@ -338,6 +338,22 @@ app.get('/api/getNotes', async (req, res) => {
         res.status(500).json({ message: 'Error when getting notes', error: err.message });
     }
 })
+app.delete('/api/deleteNotes/:id', async (req, res) => {
+    try {
+        const noteId = req.params.id;
+        const deletedNote = await Notes.findByIdAndDelete(noteId);
+
+        if (!deletedNote) {
+            return res.status(404).json({ message: 'Note not found' });
+        }
+
+        res.status(200).json({ message: 'Note deleted successfully' });
+    } catch (err) {
+        console.error('Error deleting note:', err);
+        res.status(500).json({ message: 'Error when deleting note', error: err.message });
+    }
+});
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
