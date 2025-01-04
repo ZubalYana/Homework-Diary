@@ -287,7 +287,20 @@ $(document).ready(function() {
     }
     fetchAndDisplayNotes()
     
-    
+    //custom notes input
+const notesInput = document.getElementById('notesInput');
+const fileNameDisplay = document.getElementById('fileNameDisplay');
+
+notesInput.addEventListener('change', () => {
+    const files = notesInput.files;
+    if (files.length) {
+        const fileNames = Array.from(files).map(file => file.name).join(', ');
+        fileNameDisplay.textContent = `Вибрані файли: ${fileNames}`;
+    } else {
+        fileNameDisplay.textContent = 'Немає вибраних файлів';
+    }
+});
+
      
 });
 

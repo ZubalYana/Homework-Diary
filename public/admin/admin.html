@@ -257,13 +257,23 @@
             <div class="sendDistribution_btn">Надіслати</div>
         </div>
         <div class="notes" id="notes">
-            <h3>Додати новий конспект:</h3>
-            <input type="file" id="notesInput" multiple>
-            <input type="text" id="notesName" placeholder="Назва">
-            <input type="text" id="notesDescription" placeholder="Опис">
-            <input type="date" id="notesDate">
+            <h3 class="notesTitle">Додати новий конспект:</h3>
+            <div class="fileInputContainer">
+                <label for="notesInput" class="customFileInput">
+                    <i class="fa-solid fa-upload"></i>Вибрати файли
+                </label>
+                <div class="fileNameDisplay" id="fileNameDisplay">Немає вибраних файлів</div>
+                <input type="file" id="notesInput" multiple>
+            </div>
+            
+            <div class="notesNameAndDate">
+                <input type="text" id="notesName" placeholder="Назва" class="notesName">
+                <input type="date" id="notesDate" class="notesDate">
+            </div>
+
+            <textarea type="text" id="notesDescription" placeholder="Опис" class="notesDescription"></textarea>
             <button id="createNoteBtn">Додати</button>
-            <h3>Існуючі конспекти:</h3>
+            <h3 class="notesTitle">Існуючі конспекти:</h3>
             <div class="notesContainer"></div>
         </div>
         

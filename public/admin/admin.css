@@ -329,6 +329,48 @@
   display: none;
   flex-direction: column;
 }
+.wrap .notes .notesTitle {
+  font-size: 20px;
+  color: #212121;
+  font-weight: 500;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.wrap .notes .fileInputContainer {
+  position: relative;
+  margin-bottom: 15px;
+}
+.wrap .notes .fileInputContainer .customFileInput {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #212121;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+}
+.wrap .notes .fileInputContainer .customFileInput i {
+  margin-right: 8px;
+  font-size: 18px;
+}
+.wrap .notes .fileInputContainer .customFileInput:hover {
+  background-color: #000000;
+}
+.wrap .notes .fileInputContainer .fileNameDisplay {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+  font-style: italic;
+}
+.wrap .notes #notesInput {
+  display: none;
+}
 .wrap .notes .notesContainer {
   width: 100%;
 }
@@ -391,6 +433,56 @@
 .wrap .notes .notesContainer .note .deleteNoteBtn:hover {
   background-color: #212121;
   color: #f1f1f1;
+}
+.wrap .notes .notesNameAndDate {
+  width: 670px;
+  display: flex;
+  justify-content: space-between;
+}
+.wrap .notes .notesNameAndDate .notesName {
+  width: 400px;
+  height: 40px;
+  border-radius: 10px;
+  padding-left: 10px;
+  outline: none;
+  border: 1px #212121 solid;
+}
+.wrap .notes .notesNameAndDate .notesDate {
+  width: 250px;
+  height: 40px;
+  border-radius: 10px;
+  outline: none;
+  border: 1px #212121 solid;
+  padding: 10px;
+}
+.wrap .notes .notesDescription {
+  width: 400px;
+  height: 150px;
+  resize: none;
+  border-radius: 10px;
+  padding: 10px;
+  outline: none;
+  border: 1px #212121 solid;
+  margin-top: 20px;
+}
+.wrap .notes #createNoteBtn {
+  width: 150px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: #00796b;
+  cursor: pointer;
+  color: #f1f1f1;
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  margin-top: 15px;
+  transition: all 0.5s ease;
+  margin-bottom: 30px;
+}
+.wrap .notes #createNoteBtn:hover {
+  background-color: #02675b;
 }
 
 .settingsCon {
