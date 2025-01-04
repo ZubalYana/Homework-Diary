@@ -328,6 +328,47 @@
   display: none;
   flex-direction: column;
 }
+.wrap .notes .notesContainer {
+  width: 100%;
+}
+.wrap .notes .notesContainer .note {
+  width: 100%;
+  padding: 20px;
+  border-radius: 16px;
+  background-color: #00796b;
+  color: #f1f1f1;
+  margin-bottom: 30px;
+}
+.wrap .notes .notesContainer .note .notesImgsContainer {
+  max-height: 300px;
+  width: 100%;
+  display: flex;
+  overflow-x: auto;
+}
+.wrap .notes .notesContainer .note .noteImg {
+  max-width: 300px;
+  max-height: 300px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+.wrap .notes .notesContainer .note .noteName {
+  font-size: 24px;
+  font-weight: 600;
+  margin-top: 15px;
+}
+.wrap .notes .notesContainer .note .noteDescription {
+  font-size: 16px;
+  font-weight: 300;
+  margin-top: 5px;
+}
+.wrap .notes .notesContainer .note .noteDate {
+  font-size: 16px;
+  font-weight: 300;
+  margin-top: 5px;
+}
+.wrap .notes .notesContainer .note .noteDateNum {
+  font-weight: 600;
+}
 
 .settingsCon {
   width: 100%;

@@ -317,6 +317,47 @@
       width: 100%;
       display: none;
       flex-direction: column;
+      .notesContainer{
+        width: 100%;
+        .note{
+          width: 100%;
+          padding: 20px;
+          border-radius: 16px;
+          background-color: #00796b;
+          color: #f1f1f1;
+          margin-bottom: 30px;
+          .notesImgsContainer{
+            max-height: 300px;
+            width: 100%;
+            display: flex;
+            overflow-x: auto;
+          }
+          .noteImg{
+            max-width: 300px;
+            max-height: 300px;
+            margin-right: 20px;
+            margin-bottom: 20px;
+          }
+          .noteName{
+            font-size: 24px;
+            font-weight: 600;
+            margin-top: 15px;
+          }
+          .noteDescription{
+            font-size: 16px;
+            font-weight: 300;
+            margin-top: 5px;
+          }
+          .noteDate{
+            font-size: 16px;
+            font-weight: 300;
+            margin-top: 5px;
+          }
+          .noteDateNum{
+            font-weight: 600;
+          }
+        }
+      }
     }
 
 }

@@ -236,25 +236,27 @@ $(document).ready(function() {
                 const notes = res.data;
                 const notesContainer = $('.notesContainer');
                 notesContainer.empty();
-    
                 notes.forEach(note => {
                     const imagesContainer = $('<div class="notesImgsContainer"></div>');
     
                     note.files.forEach(file => {
-                        const fileImg = $(`<img src="${file}" alt="${note.name}">`);
+                        const fileImg = $(`<img class="noteImg" src="${file}" alt="${note.name}">`);
                         imagesContainer.append(fileImg);
                     });
+                    const formattedDate = new Intl.DateTimeFormat('uk-UA', { 
+                        day: 'numeric', 
+                        month: 'long', 
+                        year: 'numeric' 
+                    }).format(new Date(note.date));
     
                     const noteDiv = $(`
                         <div class="note">
-                            <h3>${note.name}</h3>
-                            <p>${note.description}</p>
-                            <p>${note.date}</p>
+                            <h3 class="noteName">${note.name}</h3>
+                            <p class="noteDescription">${note.description}</p>
+                            <p class="noteDate">Дата створення: <span class="noteDateNum">${formattedDate}</span></p>
                         </div>
                     `);
-    
                     noteDiv.prepend(imagesContainer);
-    
                     notesContainer.append(noteDiv);
                 });
             })
@@ -262,7 +264,9 @@ $(document).ready(function() {
                 console.error('Error fetching notes:', error);
             });
     }
+    
     fetchAndDisplayNotes();
+    
      
 });
 
