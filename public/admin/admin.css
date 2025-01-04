@@ -52,7 +52,7 @@
   font-weight: 700;
 }
 .wrap .header .nav {
-  width: 350px;
+  width: 450px;
   font-size: 20px;
   font-weight: 300;
   display: flex;
@@ -322,6 +322,11 @@
 .wrap .distribution .sendDistribution_btn:active {
   background-color: #212121;
   color: #fff;
+}
+.wrap .notes {
+  width: 100%;
+  display: none;
+  flex-direction: column;
 }
 
 .settingsCon {

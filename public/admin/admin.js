@@ -6,6 +6,8 @@ $(document).ready(function() {
         $('#events').hide();
         $('#distribution').hide();
         $('#homework').css('display', 'flex');
+        $('#notes').css('display', 'none');
+        $('.nav_notes').removeClass('active_nav');
         $('.nav_homework').addClass('active_nav');
         $('.nav_events').removeClass('active_nav');
         $('.nav_distribution').removeClass('active_nav');
@@ -15,6 +17,8 @@ $(document).ready(function() {
         $('#events').css('display', 'flex');
         $('#distribution').hide();
         $('#homework').hide();
+        $('#notes').css('display', 'none');
+        $('.nav_notes').removeClass('active_nav');
         $('.nav_homework').removeClass('active_nav');
         $('.nav_events').addClass('active_nav');
         $('.nav_distribution').removeClass('active_nav');
@@ -24,9 +28,22 @@ $(document).ready(function() {
         $('#events').hide();
         $('#distribution').css('display', 'flex');
         $('#homework').hide();
+        $('#notes').css('display', 'none');
+        $('.nav_notes').removeClass('active_nav');
         $('.nav_homework').removeClass('active_nav');
         $('.nav_events').removeClass('active_nav');
         $('.nav_distribution').addClass('active_nav');
+        $('.burgerPopup_con').css('display', 'none')
+    });
+    $('.nav_notes').click(() => {
+        $('#events').hide();
+        $('#distribution').css('display', 'none');
+        $('#homework').hide();
+        $('#notes').css('display', 'flex');
+        $('.nav_notes').addClass('active_nav');
+        $('.nav_homework').removeClass('active_nav');
+        $('.nav_events').removeClass('active_nav');
+        $('.nav_distribution').removeClass('active_nav');
         $('.burgerPopup_con').css('display', 'none')
     });
     $('.burger').click(()=>{

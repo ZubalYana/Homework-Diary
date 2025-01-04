@@ -39,7 +39,7 @@
         font-weight: 700;
       }
       .nav {
-        width: 350px;
+        width: 450px;
         font-size: 20px;
         font-weight: 300;
         display: flex;
@@ -312,6 +312,11 @@
         background-color: #212121;
         color: #fff;
     }
+    }
+    .notes{
+      width: 100%;
+      display: none;
+      flex-direction: column;
     }
 
 }
