@@ -228,8 +228,42 @@ $(document).ready(function() {
                 console.error('Error saving notes:', error);
             });
     });
+
+    //displaying notes
+    function fetchAndDisplayNotes() {
+        axios.get('/api/getNotes')
+            .then((res) => {
+                const notes = res.data;
+                const notesContainer = $('.notesContainer');
+                notesContainer.empty();
     
+                notes.forEach(note => {
+                    const imagesContainer = $('<div class="notesImgsContainer"></div>');
     
+                    note.files.forEach(file => {
+                        const fileImg = $(`<img src="${file}" alt="${note.name}">`);
+                        imagesContainer.append(fileImg);
+                    });
+    
+                    const noteDiv = $(`
+                        <div class="note">
+                            <h3>${note.name}</h3>
+                            <p>${note.description}</p>
+                            <p>${note.date}</p>
+                        </div>
+                    `);
+    
+                    noteDiv.prepend(imagesContainer);
+    
+                    notesContainer.append(noteDiv);
+                });
+            })
+            .catch((error) => {
+                console.error('Error fetching notes:', error);
+            });
+    }
+    fetchAndDisplayNotes();
+     
 });
 
 //theme changing

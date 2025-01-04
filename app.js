@@ -41,6 +41,7 @@ if (fs.existsSync(usersFilePath)) {
 }
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
+app.use('/uploads/notes', express.static(path.join(__dirname, 'uploads/notes')));
 bot.onText(/\/start/, (msg) => {
     const chatId = msg.chat.id;
     if (!users.includes(chatId)) {
@@ -60,7 +61,6 @@ bot.onText(/\/start/, (msg) => {
     };
     bot.sendMessage(chatId, '\n Привіт! Бот активовано. \nОтримуйте всю інформацію про домашнє завдання, дедлайни та події! \nВажливо: при перенавантаженні серверу, можлива затримка повідомлення до кількох хвилин. \nУ разі виникнення будь-яких проблем у використанні чи недостачі інформаціЇ, повідомляйте: @yanavesq.', options);
 });
-
 const rateLimitMap = {};
 bot.on('message', async (msg) => {
     const chatId = msg.chat.id;
@@ -330,6 +330,14 @@ app.get('/api/getSchedule', (req, res) => {
             res.status(500).json({ message: 'Failed to fetch schedule' });
         });
 });
+app.get('/api/getNotes', async (req, res) => {
+    try {
+        const notes = await Notes.find();
+        res.status(200).json(notes);
+    } catch (err) {
+        res.status(500).json({ message: 'Error when getting notes', error: err.message });
+    }
+})
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
