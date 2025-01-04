@@ -198,6 +198,37 @@ $(document).ready(function() {
                 console.error('Error saving event:', error);
             });
     });
+
+    //notes creating
+    $('#createNoteBtn').click(() => {
+        const formData = new FormData();
+        const files = $('#notesInput')[0].files;
+    
+        for (let i = 0; i < files.length; i++) {
+            formData.append('files', files[i]);
+        }
+    
+        formData.append('name', $('#notesName').val());
+        formData.append('description', $('#notesDescription').val());
+        formData.append('date', $('#notesDate').val());
+    
+        console.log('Notes data:', [...formData]);
+    
+        axios.post('/createNotes', formData, {
+            headers: { 'Content-Type': 'multipart/form-data' }
+        })
+            .then(response => {
+                console.log('Notes saved:', response.data);
+                $('#notesName').val('');
+                $('#notesDescription').val('');
+                $('#notesDate').val('');
+                $('#notesInput').val('');
+            })
+            .catch(error => {
+                console.error('Error saving notes:', error);
+            });
+    });
+    
     
 });
 

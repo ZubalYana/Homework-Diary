@@ -15,7 +15,20 @@ const env = require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 const Homework = require('./models/Homework');
 const Schedule = require('./models/Schedule');
+const Notes = require('./models/Notes');
 const EventsArray = []
+
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './uploads/notes');
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
+
+const upload = multer({ storage });
 mongoose.connect(`mongodb+srv://zubalana0:${process.env.PASSWORD}@cluster0.niyre.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`)
     .then(() => {
         console.log('Connected to MongoDB');
@@ -271,6 +284,25 @@ app.post('/events', async (req ,res)=>{
     }
 
 })
+app.post('/createNotes', upload.array('files', 10), async (req, res) => {
+    try {
+        const { name, description, date } = req.body;
+        const fileUrls = req.files.map(file => `/uploads/notes/${file.filename}`);
+
+        const newNotes = new Notes({
+            name,
+            description,
+            date,
+            files: fileUrls
+        });
+
+        await newNotes.save();
+        res.status(201).json({ message: 'Notes saved successfully!', notes: newNotes });
+    } catch (error) {
+        console.error('Error saving notes:', error);
+        res.status(500).json({ error: 'Failed to save notes', details: error.message });
+    }
+});
 bot.on('message', (msg) => {
     const userId = 1132590035;
     const chatId = msg.chat.id;
