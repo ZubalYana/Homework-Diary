@@ -17,6 +17,7 @@ const Homework = require('./models/Homework');
 const Schedule = require('./models/Schedule');
 const Notes = require('./models/Notes');
 const EventsArray = []
+const axios = require('axios');
 
 const multer = require('multer');
 const storage = multer.diskStorage({
@@ -54,7 +55,7 @@ bot.onText(/\/start/, (msg) => {
             keyboard: [
                 [{ text: 'Домашнє завдання' }, { text: 'Події' }],
                 [{ text: 'Струкрура навчання'}, { text: 'Розклад дзвінків'}],
-                [{ text: 'Коли вже вихідні?'}],
+                [{ text: 'Коли вже вихідні?'}, { text: 'Конспекти'}],
             ],
             resize_keyboard: true
         }
@@ -121,31 +122,6 @@ bot.on('message', async (msg) => {
         }catch(err){
             console.log(err)
         }
-        // try {
-        //     const events = await Events.find().lean();
-        //     if (events.length > 0) {
-        //         let eventsMessage = '<b>Найближчі події:</b>\n\n';
-        //         events.forEach(event => {
-        //             const formattedDate = new Date(event.date).toLocaleDateString('uk-UA', {
-        //                 weekday: 'long',
-        //                 year: 'numeric',
-        //                 month: 'long',
-        //                 day: 'numeric'
-        //             });
-        //             eventsMessage += `${formattedDate}: <b>${event.name}</b>\n`;
-        //             if (event.details) {
-        //                 eventsMessage += `Деталі: ${event.details}\n`;
-        //             }
-        //             eventsMessage += '\n';
-        //         });
-        //         bot.sendMessage(chatId, eventsMessage, { parse_mode: 'HTML' });
-        //     } else {
-        //         bot.sendMessage(chatId, 'Немає запланованих подій.', { parse_mode: 'HTML' });
-        //     }
-        // } catch (error) {
-        //     console.error('Error retrieving events:', error);
-        //     bot.sendMessage(chatId, 'Сталася помилка при отриманні подій.', { parse_mode: 'HTML' });
-        // }
     }else if (msg.text === 'Струкрура навчання') {
         try{
             bot.sendMessage(chatId, 
@@ -199,8 +175,68 @@ bot.on('message', async (msg) => {
             console.log(err);
             bot.sendMessage(chatId, 'Сталася помилка при обчисленні часу до вихідних.', { parse_mode: 'HTML' });
         }
+    }else if (msg.text === 'Конспекти') {
+        try {
+            const notesRes = await axios.get('http://localhost:3000/api/getNotes');
+            const notes = notesRes.data;
+            if (notes.length === 0) {
+                return bot.sendMessage(chatId, 'Немає доступних конспектів.');
+            }
+            const inlineKeyboard = notes.map(note => [{
+                text: note.name,
+                callback_data: note._id.toString(), 
+            }]);
+            bot.sendMessage(chatId, 'Оберіть конспект:', {
+                reply_markup: {
+                    inline_keyboard: inlineKeyboard,
+                },
+            });
+        } catch (err) {
+            console.error('Error fetching notes:', err);
+            bot.sendMessage(chatId, 'Сталася помилка при завантаженні конспектів.');
+        }
+    }
+    
+    
+});
+bot.on('callback_query', async (query) => {
+    const chatId = query.message.chat.id;
+    const noteId = query.data; 
+    try {
+        const note = await Notes.findById(noteId).lean();
+
+        if (!note) {
+            return bot.sendMessage(chatId, 'Конспект не знайдено.');
+        }
+        let message = `<b>${note.name}</b>\n${note.description || ''}\nДата: ${new Date(note.date).toLocaleDateString('uk-UA')}`;
+        await bot.sendMessage(chatId, message, { parse_mode: 'HTML' });
+        console.log(note.files)
+        const mediaGroup = note.files.map(file => ({
+            type: 'photo',
+            media: `https://mammoth-fulvia-whereami-b5460dfc.koyeb.app/${file}`,
+        }));
+
+        await bot.sendMediaGroup(chatId, mediaGroup);
+    } catch (err) {
+        console.error('Error fetching note details:', err);
+        bot.sendMessage(chatId, 'Сталася помилка при завантаженні конспекту.');
     }
 });
+
+app.get('/api/getNote/:id', async (req, res) => {
+    try {
+        const note = await Notes.findById(req.params.id).lean();
+        console.log('Retrieved Note:', note);
+        if (!note) {
+            return res.status(404).json({ error: 'Note not found' });
+        }
+        res.json(note);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 app.post('/send', (req, res) => {
     console.log(req.body.message);
     const message = req.body.message;
