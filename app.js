@@ -181,6 +181,8 @@ bot.on('message', async (msg) => {
         try {
             const notesRes = await axios.get('https://mammoth-fulvia-whereami-b5460dfc.koyeb.app/getNotes');
             const notes = notesRes.data;
+            console.log(`Fetched notes (line 184): ${notes}`);
+            console.log(`${notes.length} notes fetched`);
             if (notes.length === 0) {
                 return bot.sendMessage(chatId, 'Немає доступних конспектів.');
             }
