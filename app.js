@@ -179,10 +179,8 @@ bot.on('message', async (msg) => {
         }
     }else if (msg.text === 'Конспекти') {
         try {
-            const notesRes = await axios.get('https://mammoth-fulvia-whereami-b5460dfc.koyeb.app/getNotes');
+            const notesRes = await axios.get('http://localhost:3000/getNotes');
             const notes = notesRes.data;
-            console.log(`Fetched notes (line 184): ${notes}`);
-            console.log(`${notes.length} notes fetched`);
             if (notes.length === 0) {
                 return bot.sendMessage(chatId, 'Немає доступних конспектів.');
             }
@@ -208,7 +206,6 @@ bot.on('callback_query', async (query) => {
     const noteId = query.data; 
     try {
         const note = await Notes.findById(noteId).lean();
-
         if (!note) {
             return bot.sendMessage(chatId, 'Конспект не знайдено.');
         }
@@ -219,14 +216,12 @@ bot.on('callback_query', async (query) => {
             type: 'photo',
             media: `https://mammoth-fulvia-whereami-b5460dfc.koyeb.app/${file}`,
         }));
-
         await bot.sendMediaGroup(chatId, mediaGroup);
     } catch (err) {
         console.error('Error fetching note details:', err);
         bot.sendMessage(chatId, 'Сталася помилка при завантаженні конспекту.');
     }
 });
-
 app.get('/api/getNote/:id', async (req, res) => {
     try {
         const note = await Notes.findById(req.params.id).lean();
@@ -240,6 +235,7 @@ app.get('/api/getNote/:id', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
 
 app.post('/send', (req, res) => {
     console.log(req.body.message);
@@ -370,14 +366,16 @@ app.get('/api/getSchedule', (req, res) => {
             res.status(500).json({ message: 'Failed to fetch schedule' });
         });
 });
-app.get('/api/getNotes', async (req, res) => {
+app.get('/getNotes', async (req, res) => {
     try {
         const notes = await Notes.find();
         res.status(200).json(notes);
     } catch (err) {
-        res.status(500).json({ message: 'Error when getting notes', error: err.message });
+        console.error('Error fetching notes:', err);
+        res.status(500).json({ error: 'Failed to fetch notes' });
     }
-})
+});
+
 app.delete('/api/deleteNotes/:id', async (req, res) => {
     try {
         const noteId = req.params.id;
