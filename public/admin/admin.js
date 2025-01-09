@@ -244,7 +244,7 @@ $(document).ready(function() {
     
     //displaying notes
     function fetchAndDisplayNotes() {
-        axios.get('/api/getNotes')
+        axios.get('/getNotes')
             .then((res) => {
                 const notes = res.data;
                 const notesContainer = $('.notesContainer');

@@ -179,7 +179,7 @@ bot.on('message', async (msg) => {
         }
     }else if (msg.text === 'Конспекти') {
         try {
-            const notesRes = await axios.get('http://localhost:3000/getNotes');
+            const notesRes = await axios.get('https://mammoth-fulvia-whereami-b5460dfc.koyeb.app/getNotes');
             const notes = notesRes.data;
             if (notes.length === 0) {
                 return bot.sendMessage(chatId, 'Немає доступних конспектів.');
@@ -211,12 +211,14 @@ bot.on('callback_query', async (query) => {
         }
         let message = `<b>${note.name}</b>\n${note.description || ''}\nДата: ${new Date(note.date).toLocaleDateString('uk-UA')}`;
         await bot.sendMessage(chatId, message, { parse_mode: 'HTML' });
-        console.log(note.files)
-        const mediaGroup = note.files.map(file => ({
-            type: 'photo',
-            media: `https://mammoth-fulvia-whereami-b5460dfc.koyeb.app/${file}`,
-        }));
-        await bot.sendMediaGroup(chatId, mediaGroup);
+        // await bot.sendPhoto(chatId, `http://localhost:3000${note.files[0]}`);
+        await bot.sendPhoto(chatId, `https://mammoth-fulvia-whereami-b5460dfc.koyeb.app/uploads/notes/1735965296284.jpg`);
+        // console.log(note.files)
+        // const mediaGroup = note.files.map(file => ({
+        //     type: 'photo',
+        //     media: `http://localhost:3000${file}`,
+        // }));
+        // await bot.sendMediaGroup(chatId, mediaGroup);
     } catch (err) {
         console.error('Error fetching note details:', err);
         bot.sendMessage(chatId, 'Сталася помилка при завантаженні конспекту.');
