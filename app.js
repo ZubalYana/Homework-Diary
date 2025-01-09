@@ -221,7 +221,7 @@ bot.on('callback_query', async (query) => {
         // await bot.sendMediaGroup(chatId, mediaGroup);
     } catch (err) {
         console.error('Error fetching note details:', err);
-        bot.sendMessage(chatId, 'Сталася помилка при завантаженні конспекту.');
+        bot.sendMessage(chatId, `Сталася помилка при завантаженні конспектів: ${err.message}`, { parse_mode: 'HTML' });
     }
 });
 app.get('/api/getNote/:id', async (req, res) => {
