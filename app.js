@@ -18,6 +18,8 @@ const Schedule = require('./models/Schedule');
 const Notes = require('./models/Notes');
 const EventsArray = []
 const axios = require('axios');
+const cors = require('cors');
+app.use(cors());
 
 const multer = require('multer');
 const storage = multer.diskStorage({
