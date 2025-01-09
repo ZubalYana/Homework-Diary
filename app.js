@@ -179,7 +179,7 @@ bot.on('message', async (msg) => {
         }
     }else if (msg.text === 'Конспекти') {
         try {
-            const notesRes = await axios.get('https://mammoth-fulvia-whereami-b5460dfc.koyeb.app/api/getNotes');
+            const notesRes = await axios.get('https://mammoth-fulvia-whereami-b5460dfc.koyeb.app/getNotes');
             const notes = notesRes.data;
             if (notes.length === 0) {
                 return bot.sendMessage(chatId, 'Немає доступних конспектів.');
@@ -195,7 +195,7 @@ bot.on('message', async (msg) => {
             });
         } catch (err) {
             console.error('Error fetching notes:', err);
-            bot.sendMessage(chatId, 'Сталася помилка при завантаженні конспектів.');
+            bot.sendMessage(chatId, `Сталася помилка при завантаженні конспектів: ${err.message}`, { parse_mode: 'HTML' });
         }
     }
     
