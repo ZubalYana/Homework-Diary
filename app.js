@@ -20,7 +20,8 @@ const EventsArray = []
 const axios = require('axios');
 const cors = require('cors');
 app.use(cors());
-
+const cloudinary = require('cloudinary').v2;
+const { v4: uuidv4 } = require('uuid');
 const multer = require('multer');
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -45,6 +46,11 @@ if (fs.existsSync(usersFilePath)) {
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use('/uploads/notes', express.static(path.join(__dirname, 'uploads/notes')));
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 bot.onText(/\/start/, (msg) => {
     const chatId = msg.chat.id;
     if (!users.includes(chatId)) {
@@ -179,23 +185,21 @@ bot.on('message', async (msg) => {
         }
     }else if (msg.text === 'Конспекти') {
         try {
-            const notesRes = await axios.get('https://mammoth-fulvia-whereami-b5460dfc.koyeb.app/getNotes');
-            const notes = notesRes.data;
-            if (notes.length === 0) {
-                return bot.sendMessage(chatId, 'Немає доступних конспектів.');
+            const { data: notes } = await axios.get(`${process.env.NOTES_API_URL}/getNotes`);
+            if (!notes.length) {
+                return bot.sendMessage(msg.chat.id, 'Немає доступних конспектів.');
             }
-            const inlineKeyboard = notes.map(note => [{
-                text: note.name,
-                callback_data: note._id.toString(), 
-            }]);
-            bot.sendMessage(chatId, 'Оберіть конспект:', {
-                reply_markup: {
-                    inline_keyboard: inlineKeyboard,
-                },
+
+            const inlineKeyboard = notes.map(note => [
+                { text: note.name, callback_data: note._id.toString() },
+            ]);
+
+            bot.sendMessage(msg.chat.id, 'Оберіть конспект:', {
+                reply_markup: { inline_keyboard: inlineKeyboard },
             });
         } catch (err) {
             console.error('Error fetching notes:', err);
-            bot.sendMessage(chatId, `Сталася помилка при завантаженні конспектів: ${err.message}`, { parse_mode: 'HTML' });
+            bot.sendMessage(msg.chat.id, `Сталася помилка: ${err.message}`, { parse_mode: 'HTML' });
         }
     }
     
@@ -211,14 +215,14 @@ bot.on('callback_query', async (query) => {
         }
         let message = `<b>${note.name}</b>\n${note.description || ''}\nДата: ${new Date(note.date).toLocaleDateString('uk-UA')}`;
         await bot.sendMessage(chatId, message, { parse_mode: 'HTML' });
-        // await bot.sendPhoto(chatId, `http://localhost:3000${note.files[0]}`);
-        await bot.sendPhoto(chatId, `https://mammoth-fulvia-whereami-b5460dfc.koyeb.app/uploads/notes/1735965296284.jpg`);
-        // console.log(note.files)
-        // const mediaGroup = note.files.map(file => ({
-        //     type: 'photo',
-        //     media: `http://localhost:3000${file}`,
-        // }));
-        // await bot.sendMediaGroup(chatId, mediaGroup);
+        await bot.sendPhoto(chatId, `https://mammoth-fulvia-whereami-b5460dfc.koyeb.app${note.files[0]}`);
+        // await bot.sendPhoto(chatId, `https://mammoth-fulvia-whereami-b5460dfc.koyeb.app/uploads/notes/1735965296284.jpg`);
+        console.log(note.files)
+        const mediaGroup = note.files.map(file => ({
+            type: 'photo',
+            media: `https://mammoth-fulvia-whereami-b5460dfc.koyeb.app${file}`,
+        }));
+        await bot.sendMediaGroup(chatId, mediaGroup);
     } catch (err) {
         console.error('Error fetching note details:', err);
         bot.sendMessage(chatId, `Сталася помилка при завантаженні конспектів: ${err.message}`, { parse_mode: 'HTML' });
